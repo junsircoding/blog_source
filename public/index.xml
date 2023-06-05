@@ -4,17 +4,9 @@
         <link>https://junsircoding.github.io/</link>
         <description>Get busy living, or get busy dying.</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>junsircoding@outlook.com (junsircoding)</managingEditor>
-            <webMaster>junsircoding@outlook.com (junsircoding)</webMaster><lastBuildDate>Mon, 29 May 2023 20:09:40 &#43;0800</lastBuildDate>
+            <webMaster>junsircoding@outlook.com (junsircoding)</webMaster><lastBuildDate>Fri, 26 May 2023 21:57:16 &#43;0800</lastBuildDate>
             <atom:link href="https://junsircoding.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>气象数据的各种插值问题</title>
-    <link>https://junsircoding.github.io/20230529/</link>
-    <pubDate>Mon, 29 May 2023 20:09:40 &#43;0800</pubDate>
-    <author>junsircoding</author>
-    <guid>https://junsircoding.github.io/20230529/</guid>
-    <description><![CDATA[这篇文章介绍了如何用 Plotly 库绘制热力图，并且自定义不等距的 Colorbar，最后将图的效果与 Matplotlib 的 pcolormesh 做对比。页面中可以直接预览和操作 Plotly 图表。]]></description>
-</item>
-<item>
     <title>用 Plotly Python 绘制 Heatmap，自定义不等距 Colorbar</title>
     <link>https://junsircoding.github.io/20230527/</link>
     <pubDate>Fri, 26 May 2023 21:57:16 &#43;0800</pubDate>
