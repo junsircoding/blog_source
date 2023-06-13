@@ -6,68 +6,222 @@
 到目前为止，我接触到的气象相关数据有`站点数据`、`等经纬度网格数据`和 `WRF（天气研究与预报）数据`。
 
 > 注：为叙述简便，`等经纬度网格数据` 下简称 `网格数据`，`WRF（天气研究与预报）数据` 简称 `WRF 数据`，`站点数据` 不变。
+>
+> `WRF 数据`暂未找到公开数据，先不做说明。下表列明了下文代码示例中用到的数据下载来源。
+>
+> | 数据名称 | 下载来源 |
+> | ----    | ----    |
+> | `网格数据` | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset)，搜索`station` |
+> | `站点数据` | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset) |
+> | `WRF 数据` | 暂无|
 
 <br/>
 
-`站点数据`通常用 [`Pandas`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取，结构就像这样：
+`站点数据`通常用 [`Pandas`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取：
+
+```python
+import pandas as pd
+
+df = pd.read_csv("test_station.csv", sep=",", encoding="utf-8", comment="#")
+print(df.columns)
+df = df[["latitude", "longitude", "total_column_water_vapour"]]
+df.columns = ["lat", "lon", "value"]
+print(df)
+```
+
+结构就像这样：
 
 ```
-   lat  lon  val
-0   15  136  156
-1   18  125  325
-2   25  114  514
-3   24  124  222
-4   23  126  745
-5   18  111  824
+Index(['report_id', 'station_name', 'city', 'organisation_name', 'latitude',
+       'longitude', 'sensor_altitude', 'height_of_station_above_sea_level',
+       'start_date', 'report_timestamp', 'total_column_water_vapour'],
+      dtype='object')
+            lat         lon  value
+0     49.186825  -68.263330  12.88
+1     51.192345   14.521734  30.69
+2     47.907738    7.632879  29.42
+3     48.380493   -4.496594  15.99
+4     50.798060    4.358563  19.01
+...         ...         ...    ...
+9811  60.750510 -135.222100  14.09
+9812  52.236870 -122.167810  19.11
+9813  34.226120 -118.055916  13.35
+9814  62.481323 -114.480840  15.52
+9815  62.480892 -114.480705  15.57
+
+[9816 rows x 3 columns]
 ```
 
-其中 `lat` 表示纬度，`lon` 表示经度，`val` 表示站点观测值。<br/><br/>
+其中 `lat` 表示纬度，`lon` 表示经度，`val` 表示站点观测值。
 
-`网格数据`通常用 [`Xarray`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取，结构就像这样：
+这个数据用 VSCode 简单预览是这样：
+
+![站点数据预览](/img/20230529/00.png)
+
+<br/><br/>
+
+`网格数据`通常用 [`Xarray`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取：
+
+```python
+import xarray as xr
+
+with xr.open_dataset("test_grid.nc") as ds_nc:
+    ds_nc = ds_nc.rename({"latitude":"lat", "longitude":"lon"}) # 重命名维度名称
+    dr_nc = ds_nc.isel(time=0)["t"] # 用索引的方式选取首个 time 维度, 选取变量 t
+    print(dr_nc)
+```
+
+结构就像这样：
 
 ```
-<xarray.DataArray (lat: 5, lon: 6)>
-array([[ nan,  nan,  nan,  nan,  nan, 156.],
-       [824.,  nan,  nan, 325.,  nan,  nan],
-       [ nan,  nan,  nan,  nan, 745.,  nan],
-       [ nan,  nan, 222.,  nan,  nan,  nan],
-       [ nan, 514.,  nan,  nan,  nan,  nan]])
+<xarray.DataArray 't' (lat: 721, lon: 1440)>
+[1038240 values with dtype=float32]
 Coordinates:
-  * lat      (lat) int64 15 18 23 24 25
-  * lon      (lon) int64 111 114 124 125 126 136
+  * lon      (lon) float32 0.0 0.25 0.5 0.75 1.0 ... 359.0 359.2 359.5 359.8
+  * lat      (lat) float32 90.0 89.75 89.5 89.25 ... -89.25 -89.5 -89.75 -90.0
+    time     datetime64[ns] 2020-07-01
+Attributes:
+    units:          K
+    long_name:      Temperature
+    standard_name:  air_temperature
 ```
 
-其中，`lat` 和 `lon` 是这个数据的两个维度，即纬度和经度，`Coordinates` 展示了这两个维度对应的坐标信息。<br/><br/>
+其中，`lat` 和 `lon` 是这个数据的两个维度，即纬度和经度，`Coordinates` 展示了这两个维度对应的坐标信息。
 
-`WRF 数据`通常用 [`netCDF4`](https://unidata.github.io/netcdf4-python/) 读取，结构就像这样：
+这个数据用 [Panoply](https://www.giss.nasa.gov/tools/panoply/download/) 简单预览是这样：
 
-```
-```
+![格点数据预览](/img/20230529/01.png)
 
-与等经纬度网格相比，`WRF 数据`的维度和坐标形式不太一样，它是按兰博特投影存储数据的。<br/><br/>
+<br/><br/>
 
 在实际使用过程中，经常会有这样的需求：
 
 - 将`网格数据`插值到另一个坐标、分辨率不同的`网格数据`上
 - 将`网格数据`插值到`站点数据`上
-- 将 `WRF 数据`插值到`站点数据`上
 - 将`站点数据`插值到`网格数据`上
 - ...
-
-> 注：将其他数据插值到 `WRF 数据` 上的需求较少。
-
-下面分别讲述这几种需求如何做，点击下表的`数据名称`可以下载使用到的示例数据：
-
-| 数据名称 | 下载来源 |
-| ----    | ----    |
-| [`网格数据`]() | |
-| [`站点数据`]() | |
-| [`WRF 数据`]() | [https://wrf.nrs.gov.bc.ca/](https://wrf.nrs.gov.bc.ca/) |
 
 <br/>
 
 ### 将`网格数据`插值到另一个坐标、分辨率不同的`网格数据`上
 
+我们这里再读取一个与 `test_grid.nc` 坐标不同的一个 grib2 格式的网格数据：
+
+```python
+import xarray as xr
+
+with xr.open_dataset(
+    "test_grid.grib2", engine="cfgrib", 
+    backend_kwargs={
+        "indexpath":"",
+        'filter_by_keys':{
+            'typeOfLevel':'surface',
+            'shortName':'t',
+            'level':0
+        }
+    }
+) as ds_grib2:
+    ds_grib2 = ds_grib2.rename({"latitude":"lat", "longitude":"lon"}) # 重命名维度名称
+    dr_grib2 = ds_grib2["t"]
+    print(dr_grib2)
+```
+
+结构就像这样：
+
+```
+<xarray.DataArray 't' (lat: 181, lon: 360)>
+[65160 values with dtype=float32]
+Coordinates:
+    time        datetime64[ns] ...
+    step        timedelta64[ns] ...
+    surface     float64 ...
+  * lat         (lat) float64 90.0 89.0 88.0 87.0 ... -87.0 -88.0 -89.0 -90.0
+  * lon         (lon) float64 0.0 1.0 2.0 3.0 4.0 ... 356.0 357.0 358.0 359.0
+    valid_time  datetime64[ns] ...
+Attributes: (12/29)
+    GRIB_paramId:                             130
+    GRIB_dataType:                            fc
+    GRIB_numberOfPoints:                      65160
+    GRIB_typeOfLevel:                         surface
+    GRIB_stepUnits:                           1
+    GRIB_stepType:                            instant
+    ...                                       ...
+    GRIB_name:                                Temperature
+    GRIB_shortName:                           t
+    GRIB_units:                               K
+    long_name:                                Temperature
+    units:                                    K
+    standard_name:                            air_temperature
+```
+
+用 Panoply 预览是这样：
+
+![grib2 格式的格点数据预览](/img/20230529/02.png)
+
+可以看到 `test_grid.nc` 的经纬度坐标为 `(lon: 1440, lat: 721)`，`test_grid.grib2` 的经纬度坐标为 `(lat: 181, lon: 360)`，是不一样的。
+
+如果我们想得到 nc 在 grib2 的坐标上对应的值，只要将 nc 插值到 grib2 上就可以了，代码如下：
+
+```python
+import xarray as xr
+
+with xr.open_dataset("test_grid.nc") as ds_nc:
+    ds_nc = ds_nc.rename({"latitude":"lat", "longitude":"lon"}) # 重命名维度名称
+    dr_nc = ds_nc.isel(time=0)["t"] # 用索引的方式选取首个 time 维度, 选取变量 t
+
+with xr.open_dataset(
+    "test_grid.grib2", engine="cfgrib", 
+    backend_kwargs={
+        "indexpath":"",
+        'filter_by_keys':{
+            'typeOfLevel':'surface',
+            'shortName':'t',
+            'level':0
+        }
+    }
+) as ds_grib2:
+    ds_grib2 = ds_grib2.rename({"latitude":"lat", "longitude":"lon"}) # 重命名维度名称
+    dr_grib2 = ds_grib2["t"]
+
+dr_nc_interp = dr_nc.interp(lat=dr_grib2.lat, lon=dr_grib2.lon) # 将 nc 插值到 grib2 的坐标上
+
+print(dr_nc_interp)
+dr_nc_interp.to_netcdf("test_grid_interp.nc") # 将插值后的数据导出成 nc
+```
+
+插值后的数据预览如下：
+
+```
+<xarray.DataArray 't' (lat: 181, lon: 360)>
+array([[254.54649353, 254.54649353, 254.54649353, ..., 254.54649353,
+        254.54649353, 254.54649353],
+       [252.3180542 , 252.36672974, 252.41772461, ..., 252.17819214,
+        252.2230072 , 252.2701416 ],
+       [249.42973328, 249.46296692, 249.50082397, ..., 249.34706116,
+        249.3717804 , 249.39805603],
+       ...,
+       [234.89929199, 234.8343811 , 234.77180481, ..., 235.0947876 ,
+        235.02911377, 234.96342468],
+       [235.33354187, 235.33818054, 235.34359741, ..., 235.31808472,
+        235.32427979, 235.3289032 ],
+       [235.04379272, 235.04379272, 235.04379272, ..., 235.04379272,
+        235.04379272, 235.04379272]])
+Coordinates:
+    time        datetime64[ns] 2020-07-01
+  * lat         (lat) float64 90.0 89.0 88.0 87.0 ... -87.0 -88.0 -89.0 -90.0
+  * lon         (lon) float64 0.0 1.0 2.0 3.0 4.0 ... 356.0 357.0 358.0 359.0
+    step        timedelta64[ns] 00:00:00
+    surface     float64 0.0
+    valid_time  datetime64[ns] 2016-10-06
+Attributes:
+    units:          K
+    long_name:      Temperature
+    standard_name:  air_temperature
+```
+
+用 Panoply 查看插值后的数据，可以看到数据分布和 nc 是一样的，但是这两个数据的坐标是不一样的。
+
+![nc 插值到 grib2 的格点数据预览](/img/20230529/03.png)
 
 ### 将`网格数据`插值到`站点数据`上
 
@@ -79,4 +233,8 @@ Coordinates:
 
 
 
+### 示例数据下载：
 
+[nc](/data/20230529/test_grid.nc)
+[grib2](/data/20230529/test_grid.grib2)
+[station](/data/20230529/test_station.nc)

@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/junsircoding.github.io\/20230529\/"
-        },"genre": "posts","wordcount":  622 ,
+        },"genre": "posts","wordcount":  1366 ,
         "url": "https:\/\/junsircoding.github.io\/20230529\/","datePublished": "2023-05-29T20:09:40+08:00","dateModified": "2023-05-30T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -125,8 +125,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">气象数据的各种插值问题</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://junsircoding.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>junsircoding</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 622 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-29">2023-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1366 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;
                 <span id="/20230529/" class="leancloud_visitors" data-flag-title="气象数据的各种插值问题">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;次阅读
                     </span>&nbsp;</div>
@@ -143,6 +143,7 @@
         <li><a href="#将网格数据插值到站点数据上">将<code>网格数据</code>插值到<code>站点数据</code>上</a></li>
         <li><a href="#将-wrf-数据插值到站点数据上">将 <code>WRF 数据</code>插值到<code>站点数据</code>上</a></li>
         <li><a href="#将站点数据插值到网格数据上反距离权重插值">将<code>站点数据</code>插值到<code>网格数据</code>上（反距离权重插值）</a></li>
+        <li><a href="#示例数据下载">示例数据下载：</a></li>
       </ul>
     </li>
   </ul>
@@ -155,76 +156,7 @@
 <p>到目前为止，我接触到的气象相关数据有<code>站点数据</code>、<code>等经纬度网格数据</code>和 <code>WRF（天气研究与预报）数据</code>。</p>
 <blockquote>
 <p>注：为叙述简便，<code>等经纬度网格数据</code> 下简称 <code>网格数据</code>，<code>WRF（天气研究与预报）数据</code> 简称 <code>WRF 数据</code>，<code>站点数据</code> 不变。</p>
-</blockquote>
-<br/>
-<p><code>站点数据</code>通常用 <a href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html" target="_blank" rel="noopener noreffer "><code>Pandas</code></a> 读取，结构就像这样：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">   lat  lon  val
-0   15  136  156
-1   18  125  325
-2   25  114  514
-3   24  124  222
-4   23  126  745
-5   18  111  824
-</code></pre></td></tr></table>
-</div>
-</div><p>其中 <code>lat</code> 表示纬度，<code>lon</code> 表示经度，<code>val</code> 表示站点观测值。<br/><br/></p>
-<p><code>网格数据</code>通常用 <a href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html" target="_blank" rel="noopener noreffer "><code>Xarray</code></a> 读取，结构就像这样：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;xarray.DataArray (lat: 5, lon: 6)&gt;
-array([[ nan,  nan,  nan,  nan,  nan, 156.],
-       [824.,  nan,  nan, 325.,  nan,  nan],
-       [ nan,  nan,  nan,  nan, 745.,  nan],
-       [ nan,  nan, 222.,  nan,  nan,  nan],
-       [ nan, 514.,  nan,  nan,  nan,  nan]])
-Coordinates:
-  * lat      (lat) int64 15 18 23 24 25
-  * lon      (lon) int64 111 114 124 125 126 136
-</code></pre></td></tr></table>
-</div>
-</div><p>其中，<code>lat</code> 和 <code>lon</code> 是这个数据的两个维度，即纬度和经度，<code>Coordinates</code> 展示了这两个维度对应的坐标信息。<br/><br/></p>
-<p><code>WRF 数据</code>通常用 <a href="https://unidata.github.io/netcdf4-python/" target="_blank" rel="noopener noreffer "><code>netCDF4</code></a> 读取，结构就像这样：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
-</div>
-</div><p>与等经纬度网格相比，<code>WRF 数据</code>的维度和坐标形式不太一样，它是按兰博特投影存储数据的。<br/><br/></p>
-<p>在实际使用过程中，经常会有这样的需求：</p>
-<ul>
-<li>将<code>网格数据</code>插值到另一个坐标、分辨率不同的<code>网格数据</code>上</li>
-<li>将<code>网格数据</code>插值到<code>站点数据</code>上</li>
-<li>将 <code>WRF 数据</code>插值到<code>站点数据</code>上</li>
-<li>将<code>站点数据</code>插值到<code>网格数据</code>上</li>
-<li>&hellip;</li>
-</ul>
-<blockquote>
-<p>注：将其他数据插值到 <code>WRF 数据</code> 上的需求较少。</p>
-</blockquote>
-<p>下面分别讲述这几种需求如何做，点击下表的<code>数据名称</code>可以下载使用到的示例数据：</p>
+<p><code>WRF 数据</code>暂未找到公开数据，先不做说明。下表列明了下文代码示例中用到的数据下载来源。</p>
 <table>
 <thead>
 <tr>
@@ -234,24 +166,392 @@ Coordinates:
 </thead>
 <tbody>
 <tr>
-<td><a href="" rel=""><code>网格数据</code></a></td>
-<td></td>
+<td><code>网格数据</code></td>
+<td><a href="https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset" target="_blank" rel="noopener noreffer ">https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset</a>，搜索<code>station</code></td>
 </tr>
 <tr>
-<td><a href="" rel=""><code>站点数据</code></a></td>
-<td></td>
+<td><code>站点数据</code></td>
+<td><a href="https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset" target="_blank" rel="noopener noreffer ">https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset</a></td>
 </tr>
 <tr>
-<td><a href="" rel=""><code>WRF 数据</code></a></td>
-<td><a href="https://wrf.nrs.gov.bc.ca/" target="_blank" rel="noopener noreffer ">https://wrf.nrs.gov.bc.ca/</a></td>
+<td><code>WRF 数据</code></td>
+<td>暂无</td>
 </tr>
 </tbody>
 </table>
+</blockquote>
+<br/>
+<p><code>站点数据</code>通常用 <a href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html" target="_blank" rel="noopener noreffer "><code>Pandas</code></a> 读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;test_station.csv&#34;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&#34;,&#34;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&#34;#&#34;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&#34;latitude&#34;</span><span class="p">,</span> <span class="s2">&#34;longitude&#34;</span><span class="p">,</span> <span class="s2">&#34;total_column_water_vapour&#34;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;lon&#34;</span><span class="p">,</span> <span class="s2">&#34;value&#34;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结构就像这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Index([&#39;report_id&#39;, &#39;station_name&#39;, &#39;city&#39;, &#39;organisation_name&#39;, &#39;latitude&#39;,
+       &#39;longitude&#39;, &#39;sensor_altitude&#39;, &#39;height_of_station_above_sea_level&#39;,
+       &#39;start_date&#39;, &#39;report_timestamp&#39;, &#39;total_column_water_vapour&#39;],
+      dtype=&#39;object&#39;)
+            lat         lon  value
+0     49.186825  -68.263330  12.88
+1     51.192345   14.521734  30.69
+2     47.907738    7.632879  29.42
+3     48.380493   -4.496594  15.99
+4     50.798060    4.358563  19.01
+...         ...         ...    ...
+9811  60.750510 -135.222100  14.09
+9812  52.236870 -122.167810  19.11
+9813  34.226120 -118.055916  13.35
+9814  62.481323 -114.480840  15.52
+9815  62.480892 -114.480705  15.57
+
+[9816 rows x 3 columns]
+</code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>lat</code> 表示纬度，<code>lon</code> 表示经度，<code>val</code> 表示站点观测值。</p>
+<p>这个数据用 VSCode 简单预览是这样：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/20230529/00.png"
+        data-srcset="/img/20230529/00.png, /img/20230529/00.png 1.5x, /img/20230529/00.png 2x"
+        data-sizes="auto"
+        alt="/img/20230529/00.png"
+        title="站点数据预览" /></p>
+<p><br/><br/></p>
+<p><code>网格数据</code>通常用 <a href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html" target="_blank" rel="noopener noreffer "><code>Xarray</code></a> 读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&#34;test_grid.nc&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds_nc</span><span class="p">:</span>
+    <span class="n">ds_nc</span> <span class="o">=</span> <span class="n">ds_nc</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&#34;latitude&#34;</span><span class="p">:</span><span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;longitude&#34;</span><span class="p">:</span><span class="s2">&#34;lon&#34;</span><span class="p">})</span> <span class="c1"># 重命名维度名称</span>
+    <span class="n">dr_nc</span> <span class="o">=</span> <span class="n">ds_nc</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="s2">&#34;t&#34;</span><span class="p">]</span> <span class="c1"># 用索引的方式选取首个 time 维度, 选取变量 t</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dr_nc</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结构就像这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;xarray.DataArray &#39;t&#39; (lat: 721, lon: 1440)&gt;
+[1038240 values with dtype=float32]
+Coordinates:
+  * lon      (lon) float32 0.0 0.25 0.5 0.75 1.0 ... 359.0 359.2 359.5 359.8
+  * lat      (lat) float32 90.0 89.75 89.5 89.25 ... -89.25 -89.5 -89.75 -90.0
+    time     datetime64[ns] 2020-07-01
+Attributes:
+    units:          K
+    long_name:      Temperature
+    standard_name:  air_temperature
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，<code>lat</code> 和 <code>lon</code> 是这个数据的两个维度，即纬度和经度，<code>Coordinates</code> 展示了这两个维度对应的坐标信息。</p>
+<p>这个数据用 <a href="https://www.giss.nasa.gov/tools/panoply/download/" target="_blank" rel="noopener noreffer ">Panoply</a> 简单预览是这样：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/20230529/01.png"
+        data-srcset="/img/20230529/01.png, /img/20230529/01.png 1.5x, /img/20230529/01.png 2x"
+        data-sizes="auto"
+        alt="/img/20230529/01.png"
+        title="格点数据预览" /></p>
+<p><br/><br/></p>
+<p>在实际使用过程中，经常会有这样的需求：</p>
+<ul>
+<li>将<code>网格数据</code>插值到另一个坐标、分辨率不同的<code>网格数据</code>上</li>
+<li>将<code>网格数据</code>插值到<code>站点数据</code>上</li>
+<li>将<code>站点数据</code>插值到<code>网格数据</code>上</li>
+<li>&hellip;</li>
+</ul>
 <br/>
 <h3 id="将网格数据插值到另一个坐标分辨率不同的网格数据上">将<code>网格数据</code>插值到另一个坐标、分辨率不同的<code>网格数据</code>上</h3>
+<p>我们这里再读取一个与 <code>test_grid.nc</code> 坐标不同的一个 grib2 格式的网格数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="s2">&#34;test_grid.grib2&#34;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&#34;cfgrib&#34;</span><span class="p">,</span> 
+    <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&#34;indexpath&#34;</span><span class="p">:</span><span class="s2">&#34;&#34;</span><span class="p">,</span>
+        <span class="s1">&#39;filter_by_keys&#39;</span><span class="p">:{</span>
+            <span class="s1">&#39;typeOfLevel&#39;</span><span class="p">:</span><span class="s1">&#39;surface&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="s1">&#39;t&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span><span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">ds_grib2</span><span class="p">:</span>
+    <span class="n">ds_grib2</span> <span class="o">=</span> <span class="n">ds_grib2</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&#34;latitude&#34;</span><span class="p">:</span><span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;longitude&#34;</span><span class="p">:</span><span class="s2">&#34;lon&#34;</span><span class="p">})</span> <span class="c1"># 重命名维度名称</span>
+    <span class="n">dr_grib2</span> <span class="o">=</span> <span class="n">ds_grib2</span><span class="p">[</span><span class="s2">&#34;t&#34;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dr_grib2</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结构就像这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;xarray.DataArray &#39;t&#39; (lat: 181, lon: 360)&gt;
+[65160 values with dtype=float32]
+Coordinates:
+    time        datetime64[ns] ...
+    step        timedelta64[ns] ...
+    surface     float64 ...
+  * lat         (lat) float64 90.0 89.0 88.0 87.0 ... -87.0 -88.0 -89.0 -90.0
+  * lon         (lon) float64 0.0 1.0 2.0 3.0 4.0 ... 356.0 357.0 358.0 359.0
+    valid_time  datetime64[ns] ...
+Attributes: (12/29)
+    GRIB_paramId:                             130
+    GRIB_dataType:                            fc
+    GRIB_numberOfPoints:                      65160
+    GRIB_typeOfLevel:                         surface
+    GRIB_stepUnits:                           1
+    GRIB_stepType:                            instant
+    ...                                       ...
+    GRIB_name:                                Temperature
+    GRIB_shortName:                           t
+    GRIB_units:                               K
+    long_name:                                Temperature
+    units:                                    K
+    standard_name:                            air_temperature
+</code></pre></td></tr></table>
+</div>
+</div><p>用 Panoply 预览是这样：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/20230529/02.png"
+        data-srcset="/img/20230529/02.png, /img/20230529/02.png 1.5x, /img/20230529/02.png 2x"
+        data-sizes="auto"
+        alt="/img/20230529/02.png"
+        title="grib2 格式的格点数据预览" /></p>
+<p>可以看到 <code>test_grid.nc</code> 的经纬度坐标为 <code>(lon: 1440, lat: 721)</code>，<code>test_grid.grib2</code> 的经纬度坐标为 <code>(lat: 181, lon: 360)</code>，是不一样的。</p>
+<p>如果我们想得到 nc 在 grib2 的坐标上对应的值，只要将 nc 插值到 grib2 上就可以了，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&#34;test_grid.nc&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds_nc</span><span class="p">:</span>
+    <span class="n">ds_nc</span> <span class="o">=</span> <span class="n">ds_nc</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&#34;latitude&#34;</span><span class="p">:</span><span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;longitude&#34;</span><span class="p">:</span><span class="s2">&#34;lon&#34;</span><span class="p">})</span> <span class="c1"># 重命名维度名称</span>
+    <span class="n">dr_nc</span> <span class="o">=</span> <span class="n">ds_nc</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="s2">&#34;t&#34;</span><span class="p">]</span> <span class="c1"># 用索引的方式选取首个 time 维度, 选取变量 t</span>
+
+<span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+    <span class="s2">&#34;test_grid.grib2&#34;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&#34;cfgrib&#34;</span><span class="p">,</span> 
+    <span class="n">backend_kwargs</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&#34;indexpath&#34;</span><span class="p">:</span><span class="s2">&#34;&#34;</span><span class="p">,</span>
+        <span class="s1">&#39;filter_by_keys&#39;</span><span class="p">:{</span>
+            <span class="s1">&#39;typeOfLevel&#39;</span><span class="p">:</span><span class="s1">&#39;surface&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="s1">&#39;t&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span><span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">ds_grib2</span><span class="p">:</span>
+    <span class="n">ds_grib2</span> <span class="o">=</span> <span class="n">ds_grib2</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&#34;latitude&#34;</span><span class="p">:</span><span class="s2">&#34;lat&#34;</span><span class="p">,</span> <span class="s2">&#34;longitude&#34;</span><span class="p">:</span><span class="s2">&#34;lon&#34;</span><span class="p">})</span> <span class="c1"># 重命名维度名称</span>
+    <span class="n">dr_grib2</span> <span class="o">=</span> <span class="n">ds_grib2</span><span class="p">[</span><span class="s2">&#34;t&#34;</span><span class="p">]</span>
+
+<span class="n">dr_nc_interp</span> <span class="o">=</span> <span class="n">dr_nc</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">dr_grib2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">dr_grib2</span><span class="o">.</span><span class="n">lon</span><span class="p">)</span> <span class="c1"># 将 nc 插值到 grib2 的坐标上</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dr_nc_interp</span><span class="p">)</span>
+<span class="n">dr_nc_interp</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="s2">&#34;test_grid_interp.nc&#34;</span><span class="p">)</span> <span class="c1"># 将插值后的数据导出成 nc</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>插值后的数据预览如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;xarray.DataArray &#39;t&#39; (lat: 181, lon: 360)&gt;
+array([[254.54649353, 254.54649353, 254.54649353, ..., 254.54649353,
+        254.54649353, 254.54649353],
+       [252.3180542 , 252.36672974, 252.41772461, ..., 252.17819214,
+        252.2230072 , 252.2701416 ],
+       [249.42973328, 249.46296692, 249.50082397, ..., 249.34706116,
+        249.3717804 , 249.39805603],
+       ...,
+       [234.89929199, 234.8343811 , 234.77180481, ..., 235.0947876 ,
+        235.02911377, 234.96342468],
+       [235.33354187, 235.33818054, 235.34359741, ..., 235.31808472,
+        235.32427979, 235.3289032 ],
+       [235.04379272, 235.04379272, 235.04379272, ..., 235.04379272,
+        235.04379272, 235.04379272]])
+Coordinates:
+    time        datetime64[ns] 2020-07-01
+  * lat         (lat) float64 90.0 89.0 88.0 87.0 ... -87.0 -88.0 -89.0 -90.0
+  * lon         (lon) float64 0.0 1.0 2.0 3.0 4.0 ... 356.0 357.0 358.0 359.0
+    step        timedelta64[ns] 00:00:00
+    surface     float64 0.0
+    valid_time  datetime64[ns] 2016-10-06
+Attributes:
+    units:          K
+    long_name:      Temperature
+    standard_name:  air_temperature
+</code></pre></td></tr></table>
+</div>
+</div><p>用 Panoply 查看插值后的数据，可以看到数据分布和 nc 是一样的，但是这两个数据的坐标是不一样的。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/20230529/03.png"
+        data-srcset="/img/20230529/03.png, /img/20230529/03.png 1.5x, /img/20230529/03.png 2x"
+        data-sizes="auto"
+        alt="/img/20230529/03.png"
+        title="nc 插值到 grib2 的格点数据预览" /></p>
 <h3 id="将网格数据插值到站点数据上">将<code>网格数据</code>插值到<code>站点数据</code>上</h3>
 <h3 id="将-wrf-数据插值到站点数据上">将 <code>WRF 数据</code>插值到<code>站点数据</code>上</h3>
 <h3 id="将站点数据插值到网格数据上反距离权重插值">将<code>站点数据</code>插值到<code>网格数据</code>上（反距离权重插值）</h3>
+<h3 id="示例数据下载">示例数据下载：</h3>
+<p><a href="/data/20230529/test_grid.nc" rel="">nc</a>
+<a href="/data/20230529/test_grid.grib2" rel="">grib2</a>
+<a href="/data/20230529/test_station.nc" rel="">station</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
