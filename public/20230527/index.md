@@ -1,7 +1,7 @@
 # 用 Plotly Python 绘制 Heatmap，自定义不等距 Colorbar
 
 
-{{< figure src="/img/20230527/20230527_avatar.png" title="文章封面, 由作者通过 Canva 网站制作" >}}
+{{< figure src="/img/20230527/20230527_avatar.png" title="文章封面, 由作者通过 [Canva](https://www.canva.cn/) 网站制作" >}}
 
 ### 用 Matplotlib 绘制 pcolormesh 填色图
 

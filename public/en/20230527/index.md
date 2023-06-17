@@ -1,7 +1,7 @@
 # Use Plotly Python to draw a heatmap and customize a non-uniform colorbar
 
 
-{{< figure src="/img/20230527/20230527_avatar.en.png" title="Article cover, produced by the author through the Canva website" >}}
+{{< figure src="/img/20230527/20230527_avatar.en.png" title="Article cover, produced by the author through the [Canva](https://www.canva.com/) website" >}}
 
 ### Use Matplotlib to draw a filled color plot using pcolormesh
 
