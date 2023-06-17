@@ -1,7 +1,7 @@
 # 气象数据的各种插值问题
 
 
-{{< figure src="/img/20230529/20230529_avatar.png" title="文章封面, 由作者通过 [Canva](https://www.canva.cn/) 网站制作" >}}
+{{< figure src="/img/20230529/20230529_avatar.png" title="文章封面, 由作者通过 Canva 网站制作" >}}
 
 到目前为止，我接触到的气象相关数据有**等经纬度网格数据**和**站点数据**。
 
