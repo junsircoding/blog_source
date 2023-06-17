@@ -3,21 +3,22 @@
 
 {{< figure src="/img/20230529/20230529_avatar.png" title="文章封面, 由作者通过 Canva 网站制作" >}}
 
-到目前为止，我接触到的气象相关数据有`站点数据`、`等经纬度网格数据`和 `WRF（天气研究与预报）数据`。
+到目前为止，我接触到的气象相关数据有**等经纬度网格数据**和**站点数据**。
 
-> 注：为叙述简便，`等经纬度网格数据` 下简称 `网格数据`，`WRF（天气研究与预报）数据` 简称 `WRF 数据`，`站点数据` 不变。
->
-> `WRF 数据`暂未找到公开数据，先不做说明。下表列明了下文代码示例中用到的数据下载来源。
+> 注：为叙述简便，**等经纬度网格数据**以下简称**网格数据**。
+> 
+> 下表为下文代码中用到数据的下载来源。
 >
 > | 数据名称 | 下载来源 |
-> | ----    | ----    |
-> | `网格数据` | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset)，搜索`station` |
-> | `站点数据` | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset) |
-> | `WRF 数据` | 暂无|
+> | ------    | ----    |
+> | **站点数据** | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset)，搜索`station` |
+> | **网格数据** | [https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset](https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset) |
 
-<br/>
+___
 
-`站点数据`通常用 [`Pandas`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取：
+**站点数据**就是个三维数据表，一般是 CSV 或者其他文本格式，这里我使用 *test_station.csv*[^1] 文件。
+
+通常用 [Pandas](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取：
 
 ```python
 import pandas as pd
@@ -36,6 +37,7 @@ Index(['report_id', 'station_name', 'city', 'organisation_name', 'latitude',
        'longitude', 'sensor_altitude', 'height_of_station_above_sea_level',
        'start_date', 'report_timestamp', 'total_column_water_vapour'],
       dtype='object')
+
             lat         lon  value
 0     49.186825  -68.263330  12.88
 1     51.192345   14.521734  30.69
@@ -54,13 +56,13 @@ Index(['report_id', 'station_name', 'city', 'organisation_name', 'latitude',
 
 其中 `lat` 表示纬度，`lon` 表示经度，`val` 表示站点观测值。
 
-这个数据用 VSCode 简单预览是这样：
+这个数据用 [VSCode](https://code.visualstudio.com/) 简单预览是这样：
 
 ![站点数据预览](/img/20230529/00.png)
 
-<br/><br/>
+___
 
-`网格数据`通常用 [`Xarray`](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取：
+**网格数据**通常用 [Xarray](https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html) 读取，这里我使用 *test_grid.nc*[^2]：
 
 ```python
 import xarray as xr
@@ -86,26 +88,29 @@ Attributes:
     standard_name:  air_temperature
 ```
 
-其中，`lat` 和 `lon` 是这个数据的两个维度，即纬度和经度，`Coordinates` 展示了这两个维度对应的坐标信息。
+其中，`lat` 和 `lon` 是这个数据的两个维度，即纬度和经度，`Coordinates` 展示了这两个维度对应的坐标信息，`Attributes` 是一些属性信息，是个 Dict。
 
 这个数据用 [Panoply](https://www.giss.nasa.gov/tools/panoply/download/) 简单预览是这样：
 
 ![格点数据预览](/img/20230529/01.png)
 
-<br/><br/>
+___
 
 在实际使用过程中，经常会有这样的需求：
 
-- 将`网格数据`插值到另一个坐标、分辨率不同的`网格数据`上
-- 将`网格数据`插值到`站点数据`上
-- 将`站点数据`插值到`网格数据`上
+- 将**网格数据**插值到另一个坐标、分辨率不同的**网格数据**上
+- 将**网格数据**插值到**站点数据**上
+- 将**站点数据**插值到**网格数据**上
 - ...
 
-<br/>
+下面逐一说明。
 
-### 将`网格数据`插值到另一个坐标、分辨率不同的`网格数据`上
+___
 
-我们这里再读取一个与 `test_grid.nc` 坐标不同的一个 grib2 格式的网格数据：
+
+### 将网格数据插值到另一个坐标、分辨率不同的网格数据上
+
+我们这里再读取一个与 *test_grid.nc* 坐标不同的一个 grib2 格式的网格数据，*test_grid.grib2*[^3]：
 
 ```python
 import xarray as xr
@@ -158,9 +163,9 @@ Attributes: (12/29)
 
 ![grib2 格式的格点数据预览](/img/20230529/02.png)
 
-可以看到 `test_grid.nc` 的经纬度坐标为 `(lon: 1440, lat: 721)`，`test_grid.grib2` 的经纬度坐标为 `(lat: 181, lon: 360)`，是不一样的。
+可以看到 *test_grid.nc* 的经纬度坐标为 `(lon: 1440, lat: 721)`，*test_grid.grib2* 的经纬度坐标为 `(lat: 181, lon: 360)`，是不一样的。
 
-如果我们想得到 nc 在 grib2 的坐标上对应的值，只要将 nc 插值到 grib2 上就可以了，代码如下：
+如果我们想得到 *test_grid.nc* 在 *test_grid.grib2* 的坐标上对应的值，只要将前者插值到 *test_grid.grib2* 上就可以了，代码如下：
 
 ```python
 import xarray as xr
@@ -219,14 +224,15 @@ Attributes:
     standard_name:  air_temperature
 ```
 
-用 Panoply 查看插值后的数据，可以看到数据分布和 nc 是一样的，但是这两个数据的坐标是不一样的。
+用 Panoply 查看插值后的数据，可以看到数据分布和 *test_grid.nc* 是一样的，但是这两个数据的坐标是不一样的。
 
 ![nc 插值到 grib2 的格点数据预览](/img/20230529/03.png)
 
+___
 
-### 将`网格数据`插值到`站点数据`上
+### 将网格数据插值到站点数据上
 
-#### 将一维的`站点数据`转为二维的网格数据
+#### 将三维的站点数据转为三维的网格数据
 
 这里我写了两种方式，一种是直接 for 循环填充数据，当数据量较大时速度很慢；一种是用 Pandas 的内置方法，性能较好。
 
@@ -238,10 +244,10 @@ import xarray as xr
 
 
 def d1_to_d2_low(df_ori: pd.DataFrame, nan_val=np.nan):
-    """将 flatten 后的一维数据转为二维网格数据, 慢速版本
+    """将 flatten 后的二维数据转为三维网格数据, 慢速版本
     
     Args:
-        df_ori(pd.DataFrame): 一维数据
+        df_ori(pd.DataFrame): 二维数据
         nan_val(any): 缺测值, 默认为 np.nan
 
     Returns:
@@ -272,10 +278,10 @@ def d1_to_d2_low(df_ori: pd.DataFrame, nan_val=np.nan):
 
 
 def d1_to_d2_fast(df_ori: pd.DataFrame, is_save: bool=True):
-    """将 flatten 后的一维数据转为二维网格数据, 快速版本
+    """将 flatten 后的二维数据转为三维网格数据, 快速版本
     
     Args:
-        df_ori(pd.DataFrame): 一维数据
+        df_ori(pd.DataFrame): 二维数据
         is_save(bool): 是否导出为 NC
 
     Returns:
@@ -320,21 +326,24 @@ r2 = d1_to_d2_fast(df)
 print(time.time() - start2) # 0.10771322250366211
 ```
 
-执行代码后生成的 `station_grid.nc` 就是一维的站点数据转为二维的网格数据。
+执行代码后生成的 *station_grid.nc* 就是二维的站点数据转为三维的网格数据。
 
-**这一步骤不是必须的**，只是为了能直观的用 Panoply 快速查看站点数据的分布情况。当然你也可以用 Matplotlib 绘制站点数据的散点图。
+**这一步骤不是必须的**，只是为了能直观的用 Panoply 快速查看站点数据的分布情况。当然你也可以用 [Matplotlib](https://matplotlib.org/stable/gallery/misc/keyword_plotting.html#sphx-glr-gallery-misc-keyword-plotting-py) 绘制站点数据的散点图。
 
-代码最后注释标出的快速版的时间比慢速版的还要慢，这是正常的。这是因为示例数据数据量较少，当数据量很大，数据精度很高时，耗时的区别就非常明显了，可以自行尝试。
+代码最后注释标出的快速版的时间比慢速版的还要慢，这是正常的，这是因为示例数据数据量较少。当数据量很大，数据精度很高时，耗时的区别就非常明显了，可以自行尝试。
 
 > 注：站点数据要保证同一经纬度是唯一的，这里的示例数据因为源数据有其他维度，所以同一经纬度的数据不唯一，我在读取的时候手动去重了。
 
 这个数据用 Panoply 预览是这样：
 
-![站点数据转为二维网格数据预览](/img/20230529/04.png)
+![站点数据转为三维网格数据预览](/img/20230529/04.png)
+
+___
+
 
 #### 将网格数据插值到站点数据
 
-完成这个步骤的常规方法是逐行读取站点数据，然后将每个站点插值到 `test_nc` 上：
+完成这个步骤的常规方法是逐行读取站点数据，然后将每个站点插值到 *test_nc* 上：
 
 ```python
 import xarray as xr
@@ -357,13 +366,13 @@ dr_nc_to_station = d1_to_d2_fast(df_nc_interp)
 xr.Dataset({"data":dr_nc_to_station}).to_netcdf("dr_nc_to_station.nc")
 ```
 
-得出的 `df_nc_interp` 就是插值后的数据，`dr_nc_to_station.nc` 是用上面的方法将其转成了二维网格。用 Panoply 预览如下：
+得出的 *df_nc_interp* 就是插值后的数据，*dr_nc_to_station.nc* 是用上面的方法将其转成了三维网格。用 Panoply 预览如下：
 
 ![格点数据插值到站点，慢速](/img/20230529/05.png)
 
 可以想见，这种方式性能也比较一般，当站点数据很多是，逐一循环速度很慢。
 
-我们可以用 `scipy` 的插值方法一次性得到所有的插值结果：
+我们可以用 [Scipy](https://matplotlib.org/stable/gallery/misc/keyword_plotting.html#sphx-glr-gallery-misc-keyword-plotting-py) 的插值方法一次性得到所有的插值结果：
 
 ```python
 import time
@@ -374,7 +383,7 @@ import scipy.interpolate as interpolate
 
 
 def grid_to_station_low(station_df: pd.DataFrame, grid_dr: xr.DataArray):
-    """二维格点转插值到一维站点, 慢速
+    """三维格点转插值到二维站点, 慢速
 
     Args:
         station_df(pd.DataFrame): 站点数据
@@ -395,7 +404,7 @@ def grid_to_station_low(station_df: pd.DataFrame, grid_dr: xr.DataArray):
 
 
 def grid_to_station_fast(station_df: pd.DataFrame, grid_dr: xr.DataArray):
-    """二维格点转插值到一维站点, 快速
+    """三维格点转插值到二维站点, 快速
 
     Args:
         station_df(pd.DataFrame): 站点数据
@@ -446,15 +455,17 @@ print(time.time() - start2) # 21.849611043930054
 
 ![格点数据插值到站点，快速](/img/20230529/06.png)
 
-#### 将二维网格数据转为一维
+___
+
+#### 将三维网格数据转为二维
 
 这个步骤也不是必须的，仅用于需要的情况。
 
-`Xarray` 有方便的方法可以将二维的网格数据直接转为类似站点数据格式的一维数据：
+`Xarray` 有方便的方法可以将三维的网格数据直接转为类似站点数据格式的二维数据：
 
 ```python
 import pandas as pd
-improt xarray as xr
+import xarray as xr
 
 with xr.open_dataset("test_grid.nc") as ds_nc:
     ds_nc = ds_nc.rename({"latitude":"lat", "longitude":"lon"}) # 重命名维度名称
@@ -469,14 +480,16 @@ pd.DataFrame(data={
 }).to_csv("d2_to_d1.csv", index=None)
 ```
 
+___
 
-### 将`站点数据`插值到`网格数据`上（反距离权重插值）
+
+### 将**站点数据**插值到**网格数据**上（反距离权重插值）
 
 还会有一种需求，是将站点数据插值到指定精度的网格上。
 原本为 NAN 的数据要运用反距离权重插值预测出对应的值，而反距离权重插值简单讲就是要预测的点的值取决于距离它最近的点。
 与它距离越近，对它的影响就越大。
 
-反距离权重插值需要安装 `wradlib` 库，用 Conda 可以直接安装：
+反距离权重插值需要安装 [wradlib](https://docs.wradlib.org/en/latest/generated/wradlib.ipol.Idw.html#wradlib.ipol.Idw) 库，用 Conda 可以直接安装：
 
 ```shell
 conda install wradlib -c conda-forge -y
@@ -521,9 +534,10 @@ xr.Dataset({"data": nc_interp}).to_netcdf("station_to_grid.nc")
 
 ![格点数据插值到站点，快速](/img/20230529/07.png)
 
+___
 
 ### 示例数据下载：
 
-[nc](/data/20230529/test_grid.nc)
-[grib2](/data/20230529/test_grid.grib2)
-[station](/data/20230529/test_station.nc)
+[^1]: [*test_station.csv*](/data/20230529/test_station.csv)
+[^2]: [*test_station.csv*](/data/20230529/test_grid.nc)
+[^3]: [*test_grid.grib2*](/data/20230529/test_grid.grib2)
