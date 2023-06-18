@@ -142,7 +142,7 @@
         <li><a href="#将网格数据插值到另一个坐标分辨率不同的网格数据上">将网格数据插值到另一个坐标、分辨率不同的网格数据上</a></li>
         <li><a href="#将网格数据插值到站点数据上">将网格数据插值到站点数据上</a>
           <ul>
-            <li><a href="#将三维的站点数据转为三维的网格数据">将三维的站点数据转为三维的网格数据</a></li>
+            <li><a href="#将二维的站点数据转为三维的网格数据">将二维的站点数据转为三维的网格数据</a></li>
             <li><a href="#将网格数据插值到站点数据">将网格数据插值到站点数据</a></li>
             <li><a href="#将三维网格数据转为二维">将三维网格数据转为二维</a></li>
           </ul>
@@ -182,7 +182,7 @@
 </table>
 </blockquote>
 <hr>
-<p><strong>站点数据</strong>就是个三维数据表，一般是 CSV 或者其他文本格式，这里我使用 <em>test_station.csv</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 文件。</p>
+<p><strong>站点数据</strong>就是个二维数据表，一般是 CSV 或者其他文本格式，这里我使用 <em>test_station.csv</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 文件。</p>
 <p>通常用 <a href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html" target="_blank" rel="noopener noreffer ">Pandas</a> 读取：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -552,7 +552,7 @@ Attributes:
         title="nc 插值到 grib2 的格点数据预览" /></p>
 <hr>
 <h3 id="将网格数据插值到站点数据上">将网格数据插值到站点数据上</h3>
-<h4 id="将三维的站点数据转为三维的网格数据">将三维的站点数据转为三维的网格数据</h4>
+<h4 id="将二维的站点数据转为三维的网格数据">将二维的站点数据转为三维的网格数据</h4>
 <p>这里我写了两种方式，一种是直接 for 循环填充数据，当数据量较大时速度很慢；一种是用 Pandas 的内置方法，性能较好。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -967,7 +967,7 @@ Attributes:
         title="格点数据插值到站点，快速" /></p>
 <hr>
 <h4 id="将三维网格数据转为二维">将三维网格数据转为二维</h4>
-<p>这个步骤也不是必须的，仅用于需要的情况。</p>
+<p><strong>这个步骤也不是必须的</strong>，仅用于需要的情况。</p>
 <p><code>Xarray</code> 有方便的方法可以将三维的网格数据直接转为类似站点数据格式的二维数据：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
