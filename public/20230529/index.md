@@ -536,8 +536,8 @@ xr.Dataset({"data": nc_interp}).to_netcdf("station_to_grid.nc")
 
 ___
 
-### 示例数据下载：
+### 示例数据下载
 
 [^1]: [*test_station.csv*](/data/20230529/test_station.csv)
-[^2]: [*test_station.csv*](/data/20230529/test_grid.nc)
+[^2]: [*test_grid.nc*](/data/20230529/test_grid.nc)
 [^3]: [*test_grid.grib2*](/data/20230529/test_grid.grib2)
