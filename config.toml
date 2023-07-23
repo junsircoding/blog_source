@@ -333,7 +333,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     # Codepen = ""
     # FreeCodeCamp = ""
     # Bitbucket = ""
-    Stackoverflow = "13471198/junsircoding"
+    # Stackoverflow = "13471198/junsircoding"
     # Weibo = ""
     # Odnoklassniki = ""
     # VK = ""
@@ -388,7 +388,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     # RootMe= ""
     # Phone = ""
     Email = "junsircoding@outlook.com"
-    RSS = true # 
+    # RSS = true
 
   # LoveIt 更改 | 0.2.0 文章页面全局配置
   [params.page]
