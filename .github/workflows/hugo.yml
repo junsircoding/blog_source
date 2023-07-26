@@ -1,12 +1,12 @@
 name: Deploy Hugo site to Pages
 on:
   # workflow_dispatch: 
-  # push:
-  #  branches:
-  #    - main
-  schedule:
-      # Runs everyday at 10:00 AM
-      - cron: "0 10 * * *"
+  push:
+   branches:
+     - main
+  # schedule:
+  #     # Runs everyday at 10:00 AM
+  #     - cron: "0 10 * * *"
 
 jobs:
   build-and-deploy:
