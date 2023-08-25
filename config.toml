@@ -628,10 +628,12 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       server = ""
     # Plausible Analytics
     [params.analytics.plausible]
-      dataDomain = "junsircoding.github.io"
+      # dataDomain = "junsircoding.github.io"
+      dataDomain = ""
     # Yandex Metrica
     [params.analytics.yandexMetrica]
-      id = "93741441"
+      # id = "93741441"
+      id = ""
 
   #  Cookie consent config
   [params.cookieconsent]
