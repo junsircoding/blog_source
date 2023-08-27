@@ -146,7 +146,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   # 日期格式
   dateFormat = "2006-01-02"
   # 网站标题, 用于 Open Graph 和 Twitter Cards
-  title = "小骏的情报站"
+  title = "小骏不抬杠"
   # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
   description = "Get busy living, or get busy dying."
   # 网站图片, 用于 Open Graph 和 Twitter Cards
@@ -168,7 +168,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       # LOGO 的 UR
       # logo = "/img/avatar_circle.png"
       # 标题名称
-      name = "小骏的情报站"
+      name = "小骏不抬杠"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
