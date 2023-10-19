@@ -1,0 +1,32 @@
+name: deploy
+
+on:
+  push:
+   branches:
+     - sphinx
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v3
+
+      - name: Install dependencies
+        run: pip install sphinx sphinx_rtd_theme myst_parser sphinx_charts sphinxcontrib-video sphinx-book-theme
+
+      - name: Sphinx build
+        run: sphinx-build -M html docs/source/ docs/build/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.BLOG_DEP_SECRET }}
+          EXTERNAL_REPOSITORY: junsircoding/junsircoding.github.io
+          PUBLISH_BRANCH: sphinx
+          PUBLISH_DIR: ./docs/build/html
+          commit_message: ${{ github.event.head_commit.message }}
