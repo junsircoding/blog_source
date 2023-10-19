@@ -17,7 +17,8 @@ release = '0.1'
 extensions = [
     'sphinx.ext.duration',
     "sphinxcontrib.video",
-    'sphinx_charts.charts'
+    'sphinx_charts.charts',
+    "sphinx_comments"
 ]
 
 templates_path = ['_templates']
@@ -34,3 +35,6 @@ html_theme = 'sphinx_rtd_theme'
 # html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
+comments_config = {
+   "hypothesis": True
+}
