@@ -36,5 +36,9 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
 comments_config = {
-   "hypothesis": True
+   "utterances": {
+      "repo": "junsircoding/blog_comments",
+      "optional": "config",
+   }
 }
+
