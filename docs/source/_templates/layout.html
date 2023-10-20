@@ -1,0 +1,13 @@
+{% extends "!layout.html" %}
+{% block comments %}
+{{ super() }}
+<hr />
+<script src="https://utteranc.es/client.js"
+    repo="junsircoding/blog_comments"
+    issue-term="pathname"
+    label="✨💬✨"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+{% endblock %}
