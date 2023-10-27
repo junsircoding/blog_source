@@ -9,7 +9,7 @@
 project = '小骏的博客'
 copyright = '2023, 小骏'
 author = '小骏'
-release = '0.1'
+# release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -34,6 +34,8 @@ language = 'zh_CN'
 # html_theme = 'sphinxdoc'
 # html_theme = 'sphinx_book_theme'
 html_theme = 'furo'
+html_logo = '_static/avatar_circle.png'
+html_show_sphinx = False
 html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
 comments_config = {
