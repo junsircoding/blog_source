@@ -25,7 +25,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          PERSONAL_TOKEN: ${{ secrets.BLOG_DEP_SECRET }}
+          PERSONAL_TOKEN: ${{ secrets.BLOG_DEPLOY_TOKEN_20231027 }}
           EXTERNAL_REPOSITORY: junsircoding/junsircoding.github.io
           PUBLISH_BRANCH: main
           PUBLISH_DIR: ./docs/build/html
