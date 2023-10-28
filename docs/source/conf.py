@@ -18,7 +18,8 @@ extensions = [
     'sphinx.ext.duration',
     "sphinxcontrib.video",
     'sphinx_charts.charts',
-    "sphinx_comments"
+    "sphinx_comments",
+    "sphinx_sitemap"
 ]
 
 templates_path = ['_templates']
@@ -35,6 +36,7 @@ language = 'zh_CN'
 # html_theme = 'sphinx_book_theme'
 html_theme = 'furo'
 html_logo = '_static/avatar_circle.png'
+html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
 html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
