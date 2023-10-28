@@ -46,8 +46,13 @@ comments_config = {
       "optional": "config",
    }
 }
+github_url='https://github.com/junsircoding'
 
 html_theme_options = {
-"navigation_with_keys":True    
+"navigation_with_keys":True,
+'analytics_id': 'G-KTSZ2L0J1T',
+'display_version': False,
+'style_external_links': False,
+'vcs_pageview_mode': '',
 }
 
