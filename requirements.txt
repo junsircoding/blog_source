@@ -1,9 +1,9 @@
 sphinx
 sphinx_rtd_theme
+sphinx-charts
+sphinx-book-theme
 furo
 sphinx-sitemap
 myst_parser
-sphinx-charts
 sphinxcontrib-video
-sphinx-book-theme
 sphinx-comments
