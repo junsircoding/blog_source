@@ -41,7 +41,6 @@ html_logo = '_static/logo.png'
 html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
 html_static_path = ['_static']
-html_extra_path = ['_static']
 html_favicon = '_static/favicon.ico'
 comments_config = {
    "utterances": {
@@ -66,3 +65,9 @@ sphinxemoji_style = 'twemoji'
 # 不显示'显示页面源码'链接
 html_show_sourcelink = False
 
+notfound_context = {
+    'title': '不存在这个页面',
+    'body': "<h1>不存在这个页面</h1>\n\n看看别的文章吧。",
+}
+
+notfound_urls_prefix = "/"
