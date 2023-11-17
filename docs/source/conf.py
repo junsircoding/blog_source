@@ -59,3 +59,6 @@ html_theme_options = {
 
 sphinxemoji_style = 'twemoji'
 
+# 不显示'显示页面源码'链接
+html_show_sourcelink = False
+
