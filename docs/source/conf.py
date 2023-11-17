@@ -21,6 +21,7 @@ extensions = [
    "sphinx_comments",
    "sphinx_sitemap",
    'sphinxemoji.sphinxemoji',
+   'notfound.extension',
 ]
 
 templates_path = ['_templates']

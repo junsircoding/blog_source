@@ -7,3 +7,5 @@ sphinx-sitemap
 myst_parser
 sphinxcontrib-video
 sphinx-comments
+sphinx-notfound-page
+sphinxemoji
