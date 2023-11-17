@@ -55,6 +55,8 @@ html_theme_options = {
    'display_version': False,
    'style_external_links': False,
    'vcs_pageview_mode': '',
+   'logo_only': True,
+   'titles_only': False
 }
 
 sphinxemoji_style = 'twemoji'
