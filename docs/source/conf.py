@@ -19,7 +19,8 @@ extensions = [
    "sphinxcontrib.video",
    'sphinx_charts.charts',
    "sphinx_comments",
-   "sphinx_sitemap"
+   "sphinx_sitemap",
+   'sphinxemoji.sphinxemoji',
 ]
 
 templates_path = ['_templates']
@@ -55,4 +56,6 @@ html_theme_options = {
    'style_external_links': False,
    'vcs_pageview_mode': '',
 }
+
+sphinxemoji_style = 'twemoji'
 
