@@ -15,11 +15,11 @@ author = '小骏'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.duration',
-    "sphinxcontrib.video",
-    'sphinx_charts.charts',
-    "sphinx_comments",
-    "sphinx_sitemap"
+   'sphinx.ext.duration',
+   "sphinxcontrib.video",
+   'sphinx_charts.charts',
+   "sphinx_comments",
+   "sphinx_sitemap"
 ]
 
 templates_path = ['_templates']
@@ -35,7 +35,7 @@ html_theme = 'sphinx_rtd_theme'
 # html_theme = 'sphinxdoc'
 # html_theme = 'sphinx_book_theme'
 # html_theme = 'furo'
-html_logo = '_static/avatar_circle.png'
+html_logo = '_static/logo.png'
 html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
 html_static_path = ['_static']
@@ -49,10 +49,10 @@ comments_config = {
 github_url='https://github.com/junsircoding'
 
 html_theme_options = {
-"navigation_with_keys":True,
-'analytics_id': 'G-KTSZ2L0J1T',
-'display_version': False,
-'style_external_links': False,
-'vcs_pageview_mode': '',
+   "navigation_with_keys":True,
+   'analytics_id': 'G-KTSZ2L0J1T',
+   'display_version': False,
+   'style_external_links': False,
+   'vcs_pageview_mode': '',
 }
 
