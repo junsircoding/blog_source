@@ -66,7 +66,7 @@ sphinxemoji_style = 'twemoji'
 html_show_sourcelink = False
 
 notfound_context = {
-    'title': '不存在这个页面',
+    'title': '不存在这篇文章。',
     'body': "<h1>不存在这个页面</h1>\n\n看看别的文章吧。",
 }
 
