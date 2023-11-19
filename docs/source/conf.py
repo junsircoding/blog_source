@@ -33,10 +33,10 @@ language = 'zh_CN'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 # html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
 # html_theme = 'sphinxdoc'
 # html_theme = 'sphinx_book_theme'
 # html_theme = 'furo'
+html_theme = 'sphinx_rtd_theme'
 html_logo = '_static/logo.png'
 html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
