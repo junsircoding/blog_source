@@ -19,11 +19,11 @@ exclude_patterns = []
 language = 'zh_CN'
 
 
-html_theme = 'alabaster'
+# html_theme = 'alabaster'
 # html_theme = 'sphinxdoc'
 # html_theme = 'sphinx_book_theme'
 # html_theme = 'furo'
-# html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_rtd_theme'
 html_logo = '_static/logo.png'
 html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
@@ -40,11 +40,11 @@ github_url='https://github.com/junsircoding'
 html_theme_options = {
    "navigation_with_keys":True,
    'analytics_id': 'G-KTSZ2L0J1T',
-   # 'display_version': False,
-   # 'style_external_links': False,
-   # 'vcs_pageview_mode': '',
-   # 'logo_only': True,
-   # 'titles_only': False
+   'display_version': False,
+   'style_external_links': False,
+   'vcs_pageview_mode': '',
+   'logo_only': True,
+   'titles_only': False
 }
 
 sphinxemoji_style = 'twemoji'
