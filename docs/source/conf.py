@@ -6,7 +6,6 @@ author = '小骏'
 extensions = [
    'sphinx.ext.duration',
    "sphinxcontrib.video",
-   'sphinx_charts.charts',
    "sphinx_comments",
    "sphinx_sitemap",
    'sphinxemoji.sphinxemoji',
