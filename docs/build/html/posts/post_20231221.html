@@ -61,7 +61,7 @@ commentsRunWhenDOMLoaded(addUtterances);
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="Matplotlib Axes 的位置参数到底如何设置？" href="post_20231220.html" />
-    <link rel="prev" title="欢迎来到 小骏的博客" href="../index.html" /> 
+    <link rel="prev" title="如何在你的 Sphinx 项目中加入 plotly 图表支持？" href="post_20231222.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -85,6 +85,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="post_20231222.html">如何在你的 Sphinx 项目中加入 plotly 图表支持？</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">常用的几个 AWK 命令</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">了解 AWK 中的 <strong>预定义变量</strong> 和 <strong>自动变量</strong></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id4">AWK 基本使用</a><ul>
@@ -136,6 +137,11 @@ commentsRunWhenDOMLoaded(addUtterances);
              
   <section id="awk">
 <h1>常用的几个 AWK 命令<a class="headerlink" href="#awk" title="此标题的永久链接"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>这篇文章非原创，原文为： <a class="reference external" href="https://linuxhandbook.com/awk-command-tutorial/">Getting Started With AWK Command</a> ，本文是我对它的翻译和整理，
+并非完全直译原文，很多地方的措辞改成了我自己理解后认为更加易懂的方式。</p>
+</div>
 <p>AWK 可以追溯到 Unix 时代，它是 POSIX 标准的一部分，所以在任意一个类 Unix 系统上都可以使用。</p>
 <p>与 <a class="reference external" href="https://en.wikipedia.org/wiki/Perl">Perl</a> 这样的多用途语言相比，AWK 有时会因为年代久远或者缺少功能而被人诟病，但我依然喜欢它，并且会在日常工作中使用。</p>
 <p>它在处理数据文件的时候很有优势，有时候一行代码就能实现相对复杂的功能。</p>
@@ -356,8 +362,8 @@ commentsRunWhenDOMLoaded(addUtterances);
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>awk<span class="w"> </span><span class="s1">&#39;{ print $1, $3 }&#39;</span><span class="w"> </span><span class="nv">FS</span><span class="o">=</span>,<span class="w">  </span><span class="nv">OFS</span><span class="o">=</span>,<span class="w"> </span>file.txt
 </pre></div>
 </div>
-<div class="dongbei note admonition">
-<p class="admonition-title">注意</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
 <p>这个程序中的 action 中， <code class="docutils literal notranslate"><span class="pre">$1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">$3</span></code> 中间有个逗号，这个不是分隔符的意思，而是表示
 我们想要输出 <code class="docutils literal notranslate"><span class="pre">$1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">$3</span></code> 两个变量，如果不写这个逗号，输出结果就不对了。
 因为在 action 的引号中的部分，加不加空格都是可以的，并没有严格的格式要求，
@@ -540,7 +546,7 @@ Field 分隔符是逗号。
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="../index.html" class="btn btn-neutral float-left" title="欢迎来到 小骏的博客" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="post_20231222.html" class="btn btn-neutral float-left" title="如何在你的 Sphinx 项目中加入 plotly 图表支持？" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="post_20231220.html" class="btn btn-neutral float-right" title="Matplotlib Axes 的位置参数到底如何设置？" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
