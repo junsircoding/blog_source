@@ -18,6 +18,7 @@ exclude_patterns = []
 
 language = 'zh_CN'
 
+sitemap_url_scheme = "{link}"
 
 # html_theme = 'alabaster'
 # html_theme = 'sphinxdoc'
