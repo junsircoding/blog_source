@@ -1,5 +1,5 @@
 project = '小骏的博客'
-copyright = '2023, 小骏'
+copyright = '2023, junsircoding'
 author = '小骏'
 # release = '0.1'
 
