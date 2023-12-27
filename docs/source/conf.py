@@ -1,4 +1,4 @@
-project = '小骏的博客'
+project = 'junsircoding\'s blog'
 copyright = '2023, junsircoding'
 author = '小骏'
 # release = '0.1'
