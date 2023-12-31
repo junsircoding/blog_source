@@ -1,7 +1,5 @@
 {% extends "!layout.html" %}
-{% block footer %} {{ super() }}
-
-<link rel="stylesheet" type="text/css"
-href="_static/css/custom.css">
-
+{% block extrahead %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css">
 {% endblock %}
