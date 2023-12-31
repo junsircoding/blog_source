@@ -13,6 +13,10 @@
 
 {% block htmltitle %}
 {{ super() }}
+{% if 'index' == pagename %}
+<meta name='description' content='小骏不抬杠,博客,junsircoding,blog,主页,junsir'>
+{% endif %}
+
 {% if 'post_20230527' == pagename %}
 <meta name='description' content='Plotly,Python,Heatmap,Colorbar,Matplotlib,不等距色带,自定义Colorbar,填色图'>
 {% endif %}
@@ -23,22 +27,22 @@
 {% endif %}
 
 {% if 'post_20230722' == pagename %}
-<meta name='description' content='Matplotlib,label,标签,自定义标签'>
+<meta name='description' content='Matplotlib,label,标签,自定义标签,manual,clabel,手动打标签,xwindow,wsl'>
 
 {% endif %}
 
 {% if 'post_20230723' == pagename %}
-<meta name='description' content='Vim,IDE,配置,Vim配置,Vim教程'>
+<meta name='description' content='Vim,IDE,配置,Vim配置,Vim教程,Vundle,Vim内置终端,配色,auto-pairs,NERDTree,vim-polyglot'>
 
 {% endif %}
 
 {% if 'post_20231220' == pagename %}
-<meta name='description' content='Matplotlib,Axes,位置参数'>
+<meta name='description' content='Matplotlib,Axes,位置参数,pcolormesh,填色,Colorbar垂直,Colorbar水平,horizontal,orientation,vertical'>
 
 {% endif %}
 
 {% if 'post_20231221' == pagename %}
-<meta name='description' content='常用的AWK命令,AWK教程'>
+<meta name='description' content='常用的AWK命令,AWK教程,AWK入门教程,AWK使用,常用的几个AWK命令,AWK变量,AWK切片,AWK计算非空行数'>
 
 {% endif %}
 
