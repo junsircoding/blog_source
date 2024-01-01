@@ -9,3 +9,4 @@ sphinxcontrib-video
 sphinx-comments
 sphinx-notfound-page
 sphinxemoji
+setuptools
