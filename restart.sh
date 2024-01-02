@@ -23,4 +23,4 @@ cp ${WORKDIR}/source/sitemap.xml ${WORKDIR}/build/html
 cp -r ${WORKDIR}/source/storage  ${WORKDIR}/build/html
 
 cd ${WORKDIR}/build/html
-nohup python -m http.server 2>&1 &
+nohup python -m http.server > /dev/null 2>&1 &
