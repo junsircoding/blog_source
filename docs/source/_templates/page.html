@@ -52,22 +52,3 @@
 {% endif %}
 
 {% endblock %}
-
-{% block content %}
-{{ super() }}
-
-{% if ('index' != pagename) and ('404' != pagename) %}
-    <hr />
-    <p>请留下你的评论：</p>
-    <script src="https://utteranc.es/client.js"
-        repo="junsircoding/blog_comments"
-        issue-term="pathname"
-        label="✨💬✨"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-{% endif %}
-
-
-{% endblock %}

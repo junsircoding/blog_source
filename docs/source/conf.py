@@ -1,13 +1,11 @@
 project = 'junsircoding\'s blog'
-copyright = '2023, junsircoding'
-author = '小骏'
+copyright = '2024, junsircoding'
+author = 'junsircoding'
 # release = '0.1'
 
 extensions = [
    'sphinx.ext.duration',
-   "sphinxcontrib.video",
    'sphinx_charts.charts',
-   "sphinx_comments",
    "sphinx_sitemap",
    'sphinxemoji.sphinxemoji',
    'notfound.extension',
@@ -16,7 +14,7 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-language = 'zh_CN'
+language = 'en_US'
 
 sitemap_url_scheme = "{link}"
 
@@ -30,12 +28,6 @@ html_baseurl = 'https://junsircoding.github.io/'
 html_show_sphinx = False
 html_static_path = ['_static']
 html_favicon = '_static/favicon.ico'
-comments_config = {
-   "utterances": {
-      "repo": "junsircoding/blog_comments",
-      "optional": "config",
-   }
-}
 github_url='https://github.com/junsircoding'
 
 html_theme_options = {
@@ -47,8 +39,6 @@ html_theme_options = {
    'logo_only': True,
    'titles_only': False
 }
-
-sphinxemoji_style = 'twemoji'
 
 # 不显示'显示页面源码'链接
 html_show_sourcelink = False

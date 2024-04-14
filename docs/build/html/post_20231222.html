@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="en-US">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>如何在你的 Sphinx 项目中加入 plotly 图表支持？ &mdash; junsircoding&#39;s blog  文档</title>
+  <title>如何在你的 Sphinx 项目中加入 plotly 图表支持？ &mdash; junsircoding&#39;s blog  documentation</title>
 
 
 
@@ -26,10 +26,11 @@
 
 
 
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sphinx_charts/charts.css" type="text/css" />
-      <link rel="stylesheet" href="_static/twemoji.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_charts/charts.css" />
+
+  
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="canonical" href="https://junsircoding.github.io/post_20231222.html" />
   <!--[if lt IE 9]>
@@ -44,48 +45,11 @@
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
         <script src="_static/sphinx_charts/plotly/plotly-2.11.1.min.js"></script>
         <script src="_static/sphinx_charts/charts.js"></script>
-        <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"></script>
-        <script src="_static/twemoji.js"></script>
-        <script kind="utterances">
-
-    var commentsRunWhenDOMLoaded = cb => {
-    if (document.readyState != 'loading') {
-        cb()
-    } else if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', cb)
-    } else {
-        document.attachEvent('onreadystatechange', function() {
-        if (document.readyState == 'complete') cb()
-        })
-    }
-}
-
-var addUtterances = () => {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "https://utteranc.es/client.js";
-    script.async = "async";
-
-    script.setAttribute("repo", "junsircoding/blog_comments");
-    script.setAttribute("issue-term", "pathname");
-    script.setAttribute("theme", "github-light");
-    script.setAttribute("label", "💬 comment");
-    script.setAttribute("crossorigin", "anonymous");
-
-    sections = document.querySelectorAll("div.section");
-    if (sections !== null) {
-        section = sections[sections.length-1];
-        section.appendChild(script);
-    }
-}
-commentsRunWhenDOMLoaded(addUtterances);
-</script>
-        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="常用的几个 AWK 命令" href="post_20231221.html" />
-    <link rel="prev" title="Welcome to junsircoding’s blog 👋" href="index.html" />
+    <link rel="prev" title="junsircoding’s blog" href="index.html" />
 
      
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css">
@@ -114,12 +78,12 @@ commentsRunWhenDOMLoaded(addUtterances);
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">如何在你的 Sphinx 项目中加入 plotly 图表支持？</a></li>
 <li class="toctree-l1"><a class="reference internal" href="post_20231221.html">常用的几个 AWK 命令</a></li>
@@ -134,15 +98,14 @@ commentsRunWhenDOMLoaded(addUtterances);
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">junsircoding's blog</a>
       </nav>
 
       <div class="wy-nav-content">
-
         <div class="rst-content">
-          <div role="navigation" aria-label="页面导航">
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">如何在你的 Sphinx 项目中加入 plotly 图表支持？</li>
@@ -155,7 +118,7 @@ commentsRunWhenDOMLoaded(addUtterances);
            <div itemprop="articleBody">
              
   <section id="sphinx-plotly">
-<h1>如何在你的 Sphinx 项目中加入 plotly 图表支持？<a class="headerlink" href="#sphinx-plotly" title="此标题的永久链接"></a></h1>
+<h1>如何在你的 Sphinx 项目中加入 plotly 图表支持？<a class="headerlink" href="#sphinx-plotly" title="Permalink to this heading"></a></h1>
 <p><a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> 是一个用 Python 编写的文档生成工具，Python 官方的文档以及大量的 Python 库（包括 Sphinx 自己）文档都是用它来构建的。</p>
 <p><a class="reference external" href="https://plotly.com/python/">Plotly</a> 是一个科学绘图库，不仅支持 Python，也可以用 R 以及其他语言来生成可交互的图表。</p>
 <p>这两个工具有一个共同点，那就是都可以生成 HTML 格式的内容，从而直接用浏览器打开浏览和交互。</p>
@@ -168,7 +131,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <p>接着在 Sphinx 项目中的 <code class="docutils literal notranslate"><span class="pre">${project_name}/docs/source/conf.py</span></code> 文件中的插件列表中添加这个插件：</p>
 <div class="admonition note">
-<p class="admonition-title">备注</p>
+<p class="admonition-title">Note</p>
 <p>把上面的 <code class="docutils literal notranslate"><span class="pre">${project_name}</span></code> 替换为你的实际 Sphinx 项目名称。</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -182,7 +145,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">备注</p>
+<p class="admonition-title">Note</p>
 <p>这个目录位置一定要在这里，名称也不要改，要不然不生效。</p>
 </div>
 <p>下面我们先用 Plotly 画一个图表：</p>
@@ -281,7 +244,7 @@ commentsRunWhenDOMLoaded(addUtterances);
 <p><span class="caption-text">Plotly Demo</span></p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">备注</p>
+<p class="admonition-title">Note</p>
 <p>需要注意的是，据我测试，目前只有 readthedocs 主题可以正常显示，其他的主题不生效，应该需要自己去阅读源码去调试。</p>
 </div>
 </section>
@@ -289,37 +252,21 @@ commentsRunWhenDOMLoaded(addUtterances);
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to junsircoding’s blog 👋" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="post_20231221.html" class="btn btn-neutral float-right" title="常用的几个 AWK 命令" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="junsircoding’s blog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="post_20231221.html" class="btn btn-neutral float-right" title="常用的几个 AWK 命令" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2023, junsircoding.</p>
+    <p>&#169; Copyright 2024, junsircoding.</p>
   </div>
 
    
 
 </footer>
         </div>
-
-
-    <hr />
-    <p>请留下你的评论：</p>
-    <script src="https://utteranc.es/client.js"
-        repo="junsircoding/blog_comments"
-        issue-term="pathname"
-        label="✨💬✨"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-
-
-
-
       </div>
     </section>
   </div>
