@@ -5,7 +5,6 @@ author = 'junsircoding'
 
 extensions = [
    'sphinx.ext.duration',
-   "sphinx_sitemap",
    'sphinxemoji.sphinxemoji',
    'notfound.extension',
 ]
