@@ -1,10 +1,6 @@
 sphinx
 sphinx_rtd_theme
-sphinx-book-theme
-furo
-sphinx-sitemap
 myst_parser
-sphinx-comments
 sphinx-notfound-page
 sphinxemoji
 setuptools
