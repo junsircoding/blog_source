@@ -25,3 +25,6 @@ cp -r ${WORKDIR}/source/storage  ${WORKDIR}/build/html
 
 cd ${WORKDIR}/build/html
 nohup python -m http.server > /dev/null 2>&1 &
+
+PID=$(ps aux | grep "python -m http.server" | grep -v grep | awk '{print $2}')
+echo ${PID}
