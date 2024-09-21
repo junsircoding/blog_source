@@ -4,3 +4,4 @@ myst_parser
 sphinx-notfound-page
 sphinxemoji
 setuptools
+python-docs-theme
