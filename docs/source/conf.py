@@ -1,6 +1,6 @@
-project = '小骏的博客'
+project = '小骏不抬杠'
 copyright = '2024, junsircoding'
-author = 'junsircoding'
+author = '小骏'
 # release = '0.1'
 
 extensions = [
@@ -57,3 +57,5 @@ notfound_context = {
 }
 
 notfound_urls_prefix = "/"
+
+html_css_files = ["custom.css"]
