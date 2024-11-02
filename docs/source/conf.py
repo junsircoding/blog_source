@@ -35,8 +35,8 @@ html_theme_options = {
    # python_docs_theme confs
    "root_url" : "https://junsircoding.github.io",
    "root_icon" : 'favicon.svg',
-   "root_name":"junsircoding",
-   "root_icon_alt_text":"junsircoding",
+   "root_name":"小骏的博客",
+   "root_icon_alt_text":"小骏的博客",
    "root_include_title":False,
 
    # sphinx_rtd_theme confs
@@ -58,4 +58,9 @@ notfound_context = {
 
 notfound_urls_prefix = "/"
 
-html_css_files = ["custom.css"]
+html_css_files = ["css/custom.css"]
+
+html_js_files = [
+    'js/custom.js',
+]
+
