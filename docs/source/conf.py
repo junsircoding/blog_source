@@ -1,5 +1,7 @@
+import datetime as dt
+
 project = '小骏不抬杠'
-copyright = '2024, 小骏不抬杠'
+copyright = f'2023-{dt.datetime.now():%Y}, 小骏不抬杠'
 author = '小骏'
 # release = '0.1'
 
