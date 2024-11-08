@@ -238,10 +238,12 @@
                 activateTheme(initialTheme);
             });
         </script>
+        {% if 'index' != pagename %}
         <hr/>
         <h1>欢迎评论：</h1>
         <!-- Utterances comments section -->
         <div id="utterances-container"></div>
+        {% endif %}
 
         <div class="clearer"></div>
       </div>
