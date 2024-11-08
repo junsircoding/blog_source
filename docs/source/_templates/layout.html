@@ -102,8 +102,8 @@
 {%- block extrahead -%}
     <link rel="stylesheet" href="{{ pathto('_static/pydoctheme_dark.css', 1) }}" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
     <link rel="shortcut icon" type="image/png" href="{{ pathto('_static/' ~ theme_root_icon, 1) }}" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4178487904865687"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4178487904865687" crossorigin="anonymous"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> </script>
     <meta name="google-adsense-account" content="ca-pub-4178487904865687">
     {%- if builder != "htmlhelp" %}
         {%- if not embedded %}
@@ -183,7 +183,12 @@
     {%- endif %}
 
       <div class="body" role="main">
-      {% block body %} {% endblock %}
+          <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+          </span>
+          <hr/>
+      {% block body %}
+      {% endblock %}
 
         <script>
             function loadUtterances(theme) {
@@ -279,6 +284,8 @@
             </a>
         {% endif %} {{ copyright|e }}.
         </li>
+        &nbsp;&nbsp;&nbsp;
+        <li class="nav-item nav-item-this"><span id="busuanzi_container_site_uv"> 本站访客数<span id="busuanzi_value_site_uv"></span>人次 </span></li>
         &nbsp;&nbsp;&nbsp;
         <li class="nav-item nav-item-this"><a href="mailto:junsircoding@foxmail.com" target="_blank">Email</a></li>
         &nbsp;&nbsp;&nbsp;
