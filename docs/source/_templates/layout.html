@@ -177,18 +177,14 @@
     {%- if render_sidebar %}
     {% if 'index' != pagename %}
     <div class="bodywrapper">
-    {%- else %}
-    <div class="bodywrapper_custom">
-    {% endif %}
-    {%- endif %}
-
-      <div class="body" role="main">
-          <span id="busuanzi_container_page_pv">
-            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-          </span>
-          <hr/>
-      {% block body %}
-      {% endblock %}
+        {%- else %}
+        <div class="bodywrapper_custom">
+            {% endif %}
+            {%- endif %}
+            
+            <div class="body" role="main">
+                {% block body %}
+                {% endblock %}
 
         <script>
             function loadUtterances(theme) {
