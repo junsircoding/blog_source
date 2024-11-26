@@ -238,7 +238,7 @@
                 activateTheme(initialTheme);
             });
         </script>
-        {% if 'index' != pagename %}
+        {% if "不存在这篇文章" not in title and pagename != "index" %}
         <hr/>
         <h1>欢迎评论：</h1>
         <!-- Utterances comments section -->
