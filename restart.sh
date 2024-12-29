@@ -1,6 +1,6 @@
 #!/bin/bash
-
-WORKDIR=/home/jun/Documents/blog_source/docs
+ROOT_DIR=$(pwd)
+WORKDIR=${ROOT_DIR}/docs
 # 查询并终止 main.py 的进程
 PID=$(ps aux | grep "python -m http.server" | grep -v grep | awk '{print $2}')
 echo $PID
