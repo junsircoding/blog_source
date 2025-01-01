@@ -128,6 +128,7 @@ form.inline-search input[type='submit'] {
     width: 40px;
 }
 
+
 div.document {
     display: flex;
     /* Don't let long code literals extend beyond the right side of the screen */
