@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORKDIR=/home/wangjun/Documents/blog_source/docs
+WORKDIR=/home/junsircoding/Documents/blog_source/docs
 # 查询并终止 main.py 的进程
 PID=$(ps aux | grep "python -m http.server" | grep -v grep | awk '{print $2}')
 echo $PID
@@ -11,7 +11,7 @@ else
     echo "服务未运行"
 fi
 
-source /home/wangjun/miniforge3/bin/activate blog
+source /home/junsircoding/miniforge3/bin/activate blog
 rm -rf ${WORKDIR}/build
 
 cd ${WORKDIR}
