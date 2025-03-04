@@ -9,6 +9,7 @@ extensions = [
    'sphinx.ext.duration',
    'sphinxemoji.sphinxemoji',
    'notfound.extension',
+   'sphinx_copybutton',
 ]
 
 templates_path = ['_templates']

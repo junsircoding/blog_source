@@ -140,8 +140,6 @@ span.pre {
 }
 
 div.sphinxsidebar {
-    display: flex;
-    width: min(25vw, 350px);
     float: none;
     position: sticky;
     top: 0;
@@ -158,17 +156,13 @@ div.sphinxsidebar h4 {
     margin-top: 1.5em;
 }
 
-div.bodywrapper {
-    margin-left: min(25vw, 350px);
-}
-
 div.sphinxsidebarwrapper {
+    width: 217px;
     box-sizing: border-box;
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    float: none;
-    flex-grow: 1;
+    float: left;
 }
 
 div.sphinxsidebarwrapper > h3:first-child {
@@ -197,9 +191,6 @@ div.sphinxsidebar input[type='text'] {
 }
 
 #sidebarbutton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     /* Sphinx 4.x and earlier compat */
     height: 100%;
     background-color: #CCCCCC;
@@ -208,12 +199,18 @@ div.sphinxsidebar input[type='text'] {
     font-size: 1.2em;
     cursor: pointer;
     padding-top: 1px;
-    float: none;
+    float: right;
+    display: table;
     /* after Sphinx 4.x and earlier is dropped, only the below is needed */
     width: 12px;
-    min-width: 12px;
     border-radius: 0 5px 5px 0;
     border-left: none;
+}
+
+#sidebarbutton span {
+    /* Sphinx 4.x and earlier compat */
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #sidebarbutton:hover {
@@ -492,7 +489,7 @@ div.genindex-jumpbox a {
         margin-inline-end: 0;
     }
     /* Remove sidebar and top related bar */
-    div.related, div.sphinxsidebar {
+    div.related, .sphinxsidebar {
         display: none;
     }
     /* Anchorlinks are not hidden by fixed-positioned navbar when scrolled to */
@@ -756,11 +753,4 @@ div.deprecated .versionmodified,
 div.deprecated-removed .versionmodified,
 div.versionremoved .versionmodified {
     color: var(--deprecated);
-}
-
-/* Hide header when printing */
-@media print {
-    div.mobile-nav {
-        display: none;
-    }
 }

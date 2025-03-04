@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v3
 
       - name: Install dependencies
-        run: pip install setuptools sphinx-notfound-page sphinxemoji python-docs-theme sphinx sphinx_rtd_theme myst_parser 
+        run: pip install setuptools sphinx-notfound-page sphinxemoji python-docs-theme sphinx sphinx_rtd_theme myst_parser sphinx-copybutton
 
       - name: Sphinx build
         run: sphinx-build -M html docs/source/ docs/build/

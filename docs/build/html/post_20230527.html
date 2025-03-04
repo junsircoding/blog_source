@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN" data-content_root="./">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,14 +39,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=23252803" />
-    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=41b4f12d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=3d2a89a3" />
     
-    <script src="_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7e0347cd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/custom.js?v=b7a94a21"></script>
     
@@ -121,7 +124,7 @@
     <p class="topless"><a href="post_20230529.html"
                           title="上一章">气象数据的各种插值问题</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">快速搜索</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -129,7 +132,7 @@
       <input type="submit" value="提交" />
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </nav>
     </div>
@@ -184,12 +187,12 @@
             <div class="body" role="main">
                 
   <section id="plotly-python-heatmap-colorbar">
-<h1>用 Plotly Python 绘制 Heatmap，自定义不等距 Colorbar<a class="headerlink" href="#plotly-python-heatmap-colorbar" title="Link to this heading">¶</a></h1>
+<h1>用 Plotly Python 绘制 Heatmap，自定义不等距 Colorbar<a class="headerlink" href="#plotly-python-heatmap-colorbar" title="此标题的永久链接">¶</a></h1>
 <section id="matplotlib-pcolormesh">
-<h2>用 Matplotlib 绘制 pcolormesh 填色图<a class="headerlink" href="#matplotlib-pcolormesh" title="Link to this heading">¶</a></h2>
+<h2>用 Matplotlib 绘制 pcolormesh 填色图<a class="headerlink" href="#matplotlib-pcolormesh" title="此标题的永久链接">¶</a></h2>
 <p>Matplotlib 的 <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pcolormesh.html#matplotlib.pyplot.pcolormesh">pcolormesh</a> 可以将二维数据绘制成填色图，可以一目了然地展示数据的分布情况。官方文档的 <a class="reference external" href="https://matplotlib.org/stable/gallery/images_contours_and_fields/pcolormesh_levels.html#sphx-glr-gallery-images-contours-and-fields-pcolormesh-levels-py">Demo</a> 展示了这个函数的简单使用方式。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span> <span class="c1"># 设置随机数种子, 保证每次生成的 Z 数据都相同</span>
 <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 二维网格数据, shape 为 (6x10)</span>
@@ -409,14 +412,14 @@
 <figure class="align-default" id="id1">
 <img alt="Matplotlib pcolormesh Demo" src="_images/20230527_00.png" />
 <figcaption>
-<p><span class="caption-text">Matplotlib pcolormesh Demo</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+<p><span class="caption-text">Matplotlib pcolormesh Demo</span><a class="headerlink" href="#id1" title="此图像的永久链接">¶</a></p>
 </figcaption>
 </figure>
 <p>从这张图中，结合右边的 <code class="docutils literal notranslate"><span class="pre">Colorbar</span></code> 我们可以清晰地看到数据的分布情况。</p>
 <p>目前的 <code class="docutils literal notranslate"><span class="pre">Colorbar</span></code> 是像彩虹一样的渐变形式，色值分层也是默认的连续数值。我们可以做下面的修改，自定义色值分层，自定义每个区间的颜色，让 <code class="docutils literal notranslate"><span class="pre">Colorbar</span></code> 显示成「一格一格」的形式。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundaryNorm</span><span class="p">,</span> <span class="n">ListedColormap</span> <span class="c1"># 新增</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">BoundaryNorm</span><span class="p">,</span> <span class="n">ListedColormap</span> <span class="c1"># 新增</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span> <span class="c1"># 设置随机数种子, 保证每次生成的 Z 数据都相同</span>
 <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># 二维网格数据, shape 为 (6x10)</span>
@@ -449,7 +452,7 @@
 由此我们可以很灵活地根据业务需要去调整 <code class="docutils literal notranslate"><span class="pre">Colorbar</span></code> ，画出我们想要的图。</p>
 </section>
 <section id="plotly-heatmap">
-<h2>用 Plotly 绘制 Heatmap 填色图<a class="headerlink" href="#plotly-heatmap" title="Link to this heading">¶</a></h2>
+<h2>用 Plotly 绘制 Heatmap 填色图<a class="headerlink" href="#plotly-heatmap" title="此标题的永久链接">¶</a></h2>
 <p>Matplotlib 画出的图都是静态的图片，如果我们想实时看到图中每个方格里的实际值是多少，该怎么做呢？</p>
 <p>有很多库可以绘制交互式的图表，既可以生成 HTML 网页，也可以实时在 Jupyter Notebook 中展示，本文介绍 <a class="reference external" href="https://plotly.com/python/">Plotly</a> 的使用。</p>
 <p>与 pcolormesh 效果对应的就是 Heatmap，上文中的第一个 Demo
@@ -458,8 +461,8 @@
 <img alt="连续色块" src="_images/20230527_03.png" />
 </figure>
 <p>绘图代码如下：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">19680801</span><span class="p">)</span> <span class="c1"># 设置随机数种子, 保证每次生成的 Z 数据都相同</span>
@@ -488,12 +491,12 @@
 <p>可以注意到这个图的 Colorbar 也是连续的彩虹状，而这个图要自定义 <code class="docutils literal notranslate"><span class="pre">LEVEL</span></code>
 就不像 Matplotlib 那样简单了，两个库的实现思路完全不同。</p>
 <p>这里给出实现的代码：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">trans_data</span><span class="p">(</span><span class="n">level</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">colors</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">trans_data</span><span class="p">(</span><span class="n">level</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">colors</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;转换数据</span>
 
 <span class="sd">    Args:</span>

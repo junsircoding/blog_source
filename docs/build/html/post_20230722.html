@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN" data-content_root="./">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,14 +39,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=23252803" />
-    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=41b4f12d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=3d2a89a3" />
     
-    <script src="_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7e0347cd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/custom.js?v=b7a94a21"></script>
     
@@ -128,7 +131,7 @@
     <p class="topless"><a href="post_20230529.html"
                           title="下一章">气象数据的各种插值问题</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">快速搜索</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -136,7 +139,7 @@
       <input type="submit" value="提交" />
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </nav>
     </div>
@@ -191,18 +194,18 @@
             <div class="body" role="main">
                 
   <section id="matplotlib-label">
-<h1>Matplotlib 等值线图自定义 label 标签位置<a class="headerlink" href="#matplotlib-label" title="Link to this heading">¶</a></h1>
+<h1>Matplotlib 等值线图自定义 label 标签位置<a class="headerlink" href="#matplotlib-label" title="此标题的永久链接">¶</a></h1>
 <p>在用 Matplotlib
 绘制等值线图时，经常要在等值线上打上标签，表示这条线的数值是多少。</p>
 <section id="id1">
-<h2>默认打标签<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>默认打标签<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h2>
 <p>默认情况下，Matplotlib
 会根据实际情况自动标注标签，但是这样的标签位置比较分散。</p>
 <p>比如下面这个代码：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cm</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 <span class="c1"># 创建等值线数据</span>
@@ -232,20 +235,20 @@
 <figure class="align-default" id="id4">
 <img alt="默认打点" src="_images/001.png" />
 <figcaption>
-<p><span class="caption-text">默认打点</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+<p><span class="caption-text">默认打点</span><a class="headerlink" href="#id4" title="此图像的永久链接">¶</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="id2">
-<h2>自定义打标签<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>自定义打标签<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
 <p>如果我们想自定义标签的位置该怎么做呢？其实 Matplotlib
 自带了交互式的打标签功能。</p>
 <p>只要设置 <code class="docutils literal notranslate"><span class="pre">clabel</span></code> 的 参数 <code class="docutils literal notranslate"><span class="pre">manual=True</span></code> 就可以了。</p>
 <p>修改后代码如下：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cm</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 <span class="c1"># 创建等值线数据</span>
@@ -289,7 +292,7 @@
 <figure class="align-default" id="id5">
 <img alt="交互式窗口" src="_images/021.png" />
 <figcaption>
-<p><span class="caption-text">交互式窗口</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+<p><span class="caption-text">交互式窗口</span><a class="headerlink" href="#id5" title="此图像的永久链接">¶</a></p>
 </figcaption>
 </figure>
 <p>用这个方法，就可以自定义标签的位置了。</p>
@@ -298,7 +301,7 @@
 </figure>
 </section>
 <section id="id3">
-<h2>视频讲解<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>视频讲解<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h2>
 <p><a class="reference external" href="https://www.bilibili.com/video/BV11P411r78X/">Matplotlib 等值线图自定义标签位置</a></p>
 </section>
 </section>

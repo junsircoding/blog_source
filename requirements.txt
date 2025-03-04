@@ -5,3 +5,4 @@ sphinx-notfound-page
 sphinxemoji
 setuptools
 python-docs-theme
+sphinx-copybutton
