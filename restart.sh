@@ -23,8 +23,8 @@ cp ${WORKDIR}/source/ads.txt  ${WORKDIR}/build/html
 cp ${WORKDIR}/source/sitemap.xml ${WORKDIR}/build/html
 cp -r ${WORKDIR}/source/storage  ${WORKDIR}/build/html
 
-cd ${WORKDIR}/build/html
-nohup python -m http.server > /dev/null 2>&1 &
+# cd ${WORKDIR}/build/html
+# nohup python -m http.server > /dev/null 2>&1 &
 
-PID=$(ps aux | grep "python -m http.server" | grep -v grep | awk '{print $2}')
-echo ${PID}
+# PID=$(ps aux | grep "python -m http.server" | grep -v grep | awk '{print $2}')
+# echo ${PID}
