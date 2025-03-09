@@ -6,3 +6,4 @@ sphinxemoji
 setuptools
 python-docs-theme
 sphinx-copybutton
+sphinxnotes-strike

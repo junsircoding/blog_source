@@ -9,6 +9,7 @@ extensions = [
    'sphinx.ext.duration',
    'sphinxemoji.sphinxemoji',
    'notfound.extension',
+   'sphinxnotes.strike',
    'sphinx_copybutton',
 ]
 
