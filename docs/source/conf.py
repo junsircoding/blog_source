@@ -1,4 +1,10 @@
+import os
 import datetime as dt
+import jieba
+
+# 设置 jieba 临时目录
+conf_dir = os.path.dirname(os.path.abspath(__file__))
+os.environ["TMPDIR"] = os.path.join(conf_dir, 'jieba_tmp')
 
 project = '小骏不抬杠'
 copyright = f'2023-{dt.datetime.now():%Y}, 小骏不抬杠'
