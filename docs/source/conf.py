@@ -39,8 +39,8 @@ html_theme_options = {
    # python_docs_theme confs
    "root_url" : "https://junsircoding.github.io",
    "root_icon" : 'favicon.svg',
-   "root_name":"小骏的博客",
-   "root_icon_alt_text":"小骏的博客",
+   "root_name":"小骏不抬杠",
+   "root_icon_alt_text":"小骏不抬杠",
    "root_include_title":False,
 
    # sphinx_rtd_theme confs
