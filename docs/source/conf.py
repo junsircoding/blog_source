@@ -39,8 +39,8 @@ html_theme_options = {
    # python_docs_theme confs
    "root_url" : "https://junsircoding.github.io",
    "root_icon" : 'favicon.svg',
-   "root_name":"小骏不抬杠",
-   "root_icon_alt_text":"小骏不抬杠",
+   "root_name":"首页",
+   "root_icon_alt_text":"首页",
    "root_include_title":False,
 
    # sphinx_rtd_theme confs
@@ -66,5 +66,6 @@ html_css_files = ["css/custom.css"]
 
 html_js_files = [
     'js/custom.js',
+    'js/back_to_top.js',
 ]
 
