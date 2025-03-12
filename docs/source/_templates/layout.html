@@ -33,27 +33,15 @@
       <h3>{{ _('Navigation') }}</h3>
       <ul>
           
-          {%- block rootrellink %}
-          <li><img src="{{ pathto('_static/' ~ theme_root_icon, 1) }}" alt="{{ theme_root_icon_alt_text }}" style="vertical-align: middle; margin-top: -1px"/></li>
-          <li><a href="{{theme_root_url}}">{{theme_root_name}}</a>{{ reldelim1 }}</li>
-          <li class="switchers">
-            <div class="language_switcher_placeholder"></div>
-            <div class="version_switcher_placeholder"></div>
-          </li>
-          <li>
-              {% if theme_root_include_title %}
-              <a href="{{ pathto('index') }}">{{ shorttitle }}</a>{{ reldelim1 }}
-              {% endif %}
-          </li>
-          {%- endblock %}
-
-            {%- for parent in parents %}
-            <li class="nav-item nav-item-{{ loop.index }}">
-                <a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>{{ reldelim1 }}
+            <li class="nav-item nav-item-this">
+                <a href="{{ pathto('index') }}">
+                    <img 
+                    src="{{ pathto('_static/' ~ theme_root_icon, 1) }}" 
+                    alt="{{ theme_root_icon_alt_text }}" 
+                    style="vertical-align: middle; margin-top: -1px"/>
+                    博客首页
+                </a>
             </li>
-            {%- endfor %}
-
-            <li class="nav-item nav-item-this"><a href="{{ link|e }}">{{ title }}</a></li>
 
             {% block relbaritems %}
             {%- if pagename != "search" and builder != "singlehtml" and builder != "htmlhelp" %}
