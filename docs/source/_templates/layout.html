@@ -34,11 +34,11 @@
       <ul>
           
             <li class="nav-item nav-item-this">
-                <a href="{{ pathto('index') }}">
+                <a href="{{ pathto('index') }}" style="display: inline-flex; align-items: center;">
                     <img 
-                    src="{{ pathto('_static/' ~ theme_root_icon, 1) }}" 
-                    alt="{{ theme_root_icon_alt_text }}" 
-                    style="vertical-align: middle; margin-top: -1px"/>
+                        src="{{ pathto('_static/' ~ theme_root_icon, 1) }}" 
+                        alt="{{ theme_root_icon_alt_text }}"
+                        style="margin-top: -3px;"/>&nbsp;
                     博客首页
                 </a>
             </li>
@@ -267,9 +267,25 @@
         {% endif %} {{ copyright|e }}.
         </li>
         &nbsp;&nbsp;&nbsp;
-        <li class="nav-item nav-item-this"><a href="mailto:junsircoding@foxmail.com" target="_blank">Email</a></li>
+        <li class="nav-item nav-item-this">
+            <a href="mailto:junsircoding@foxmail.com" target="_blank" style="display: inline-flex; align-items: center;">
+                <img 
+                src="_static/mail.svg" 
+                alt="Email"
+                style="margin-top: -1px;"/>
+                Email
+            </a>
+        </li>
         &nbsp;&nbsp;&nbsp;
-        <li class="nav-item nav-item-this"><a href="https://space.bilibili.com/39994473/video" target="_blank">Bilibili</a></li>
+        <li class="nav-item nav-item-this">
+            <a href="https://space.bilibili.com/39994473/video" target="_blank" style="display: inline-flex; align-items: center;">
+                <img 
+                src="_static/bilibili.svg" 
+                alt="Bilibili"
+                style="margin-top: -1px;"/>
+                Bilibili
+            </a>
+        </li>
     </ul>
 </div>
 {% endblock %}
