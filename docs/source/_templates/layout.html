@@ -180,14 +180,6 @@
             
             <div class="body" role="main">
                 {% block body %}
-                {% if 'index' != pagename and 'search' != pagename %}
-                    <!-- id 将作为查询条件 -->
-                    <span id="{{pagename}}" class="leancloud_visitors" data-flag-title="{{pagename}}">
-                        <em class="post-meta-item-text">阅读量 </em>
-                        <i class="leancloud-visitors-count"></i>
-                    </span>
-                    {{ super() }}
-                {% endif %}
                 {% endblock %}
 
                 <script>
@@ -231,6 +223,12 @@
 
         {% if "不存在这篇文章" not in title and pagename != "index" and pagename != "search" %}
         <hr/>
+        <!-- id 将作为查询条件 -->
+        <span id="{{pagename}}" class="leancloud_visitors" data-flag-title="{{title}}">
+            <em class="post-meta-item-text">阅读量 </em>
+            <i class="leancloud-visitors-count"></i>
+            <em class="post-meta-item-text"> 次</em>
+        </span>
         <!-- Valine comments section -->
         <div id="vcomments"></div>
         <script>
@@ -255,7 +253,7 @@
   {%- endblock %}
 
   {%- block sidebar2 %}
-  {% if 'index' != pagename %}
+  {% if 'index' != pagename and 'search' != pagename and "不存在这篇文章" not in title %}
   {{ sidebar_custom() }}
   {% endif %}
   {% endblock %}
