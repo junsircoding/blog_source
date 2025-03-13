@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN" data-content_root="./">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,15 +44,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=23252803" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=41b4f12d" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=638b7cfd" />
     
-    <script src="_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7e0347cd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
@@ -68,6 +68,7 @@
 <link rel="stylesheet" href="_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
     <link rel="shortcut icon" type="image/png" href="_static/favicon.svg" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4178487904865687" crossorigin="anonymous"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <meta name="google-adsense-account" content="ca-pub-4178487904865687">
             <script type="text/javascript" src="_static/copybutton.js"></script>
             <script type="text/javascript" src="_static/menu.js"></script>
@@ -140,7 +141,7 @@
     <p class="topless"><a href="post_20250302.html"
                           title="下一章">2025 年展望</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">快速搜索</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -148,7 +149,7 @@
       <input type="submit" value="提交" />
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </nav>
     </div>
@@ -210,7 +211,7 @@
             <div class="body" role="main">
                 
   <section id="id1">
-<h1>处理气象数据常用的插值方法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>处理气象数据常用的插值方法<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>这篇文章与 <a class="reference external" href="https://junsircoding.github.io/post_20230529.html">气象数据的各种插值问题</a> 内容大致相同，是它的重构版。相比旧版，修改了 IDW 插值的代码，删掉了一些与主题关联不大的段落。
@@ -221,10 +222,10 @@
 </div>
 <p>气象业务当中，比较常见的数据形式有 <strong>站点数据</strong> 和 <strong>网格数据</strong>  。</p>
 <section id="id3">
-<h2>站点数据<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>站点数据<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h2>
 <p><strong>站点数据</strong> 就是个二维数据表，一般是 CSV、TXT、或者 Excel 等格式，这里我们用一个 CSV 数据（ <em>UPA_obs.csv</em> <a class="footnote-reference brackets" href="#id11" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> ）举例。</p>
 <p>用 <a class="reference external" href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html">Pandas</a> 读取：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;UPA_obs.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 <span class="linenos">4</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">]]</span>
@@ -261,13 +262,13 @@
 <p>画图脚本如下：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 4</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="linenos"> 5</span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
-<span class="linenos"> 6</span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
-<span class="linenos"> 7</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
-<span class="linenos"> 8</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.mpl.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">LongitudeFormatter</span><span class="p">,</span> <span class="n">LatitudeFormatter</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="linenos"> 7</span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="linenos"> 8</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 9</span><span class="kn">from</span> <span class="nn">cartopy.mpl.ticker</span> <span class="kn">import</span> <span class="n">LongitudeFormatter</span><span class="p">,</span> <span class="n">LatitudeFormatter</span>
 <span class="linenos">10</span>
 <span class="linenos">11</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">]</span>
 <span class="linenos">12</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
@@ -330,7 +331,7 @@
 </div>
 </section>
 <section id="id5">
-<h2>网格数据<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<h2>网格数据<a class="headerlink" href="#id5" title="此标题的永久链接">¶</a></h2>
 <p><strong>网格数据</strong> 通常用 <a class="reference external" href="https://docs.xarray.dev/en/stable/getting-started-guide/quick-overview.html">Xarray</a> 库读取，这里我们使用 <em>GFS_test.nc</em>  <a class="footnote-reference brackets" href="#id12" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">with</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s2">&quot;GFS_test.nc&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
 <span class="linenos">2</span>    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">assign_coords</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="p">((</span><span class="n">ds</span><span class="o">.</span><span class="n">lon</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span> <span class="o">-</span> <span class="mi">180</span><span class="p">))</span> <span class="c1"># 将经度范围从[0, 360]转换为[-180, 180]</span>
@@ -362,14 +363,14 @@
 <p>画图脚本如下：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 4</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="linenos"> 5</span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="linenos"> 6</span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
-<span class="linenos"> 7</span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
-<span class="linenos"> 8</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
-<span class="linenos"> 9</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.mpl.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">LongitudeFormatter</span><span class="p">,</span> <span class="n">LatitudeFormatter</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="linenos"> 7</span><span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="linenos"> 8</span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos">10</span><span class="kn">from</span> <span class="nn">cartopy.mpl.ticker</span> <span class="kn">import</span> <span class="n">LongitudeFormatter</span><span class="p">,</span> <span class="n">LatitudeFormatter</span>
 <span class="linenos">11</span>
 <span class="linenos">12</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Microsoft YaHei&#39;</span><span class="p">]</span>
 <span class="linenos">13</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
@@ -442,7 +443,7 @@
 <p>下面逐一说明。</p>
 </section>
 <section id="id7">
-<h2>将网格数据插值到另一个坐标、分辨率不同的网格坐标上<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<h2>将网格数据插值到另一个坐标、分辨率不同的网格坐标上<a class="headerlink" href="#id7" title="此标题的永久链接">¶</a></h2>
 <p>我们上面用到的 <em>GFS_test.nc</em> 的经纬度坐标 shape 为 <code class="docutils literal notranslate"><span class="pre">(lon:</span> <span class="pre">101,</span> <span class="pre">lat:</span> <span class="pre">46)</span></code> ，
 lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨率是 1 度。
 现在我们要将这个数据插值到一个分辨率是 0.1 度的网格坐标上，范围不变。</p>
@@ -479,15 +480,15 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 </figure>
 </section>
 <section id="id8">
-<h2>将网格数据插值到站点数据上<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<h2>将网格数据插值到站点数据上<a class="headerlink" href="#id8" title="此标题的永久链接">¶</a></h2>
 <p>我们可以用 <a class="reference external" href="https://matplotlib.org/stable/gallery/misc/keyword_plotting.html#sphx-glr-gallery-misc-keyword-plotting-py">Scipy</a> 的插值函数方法一次性得到所有的插值结果：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="linenos"> 4</span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">interpolate</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="linenos"> 2</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos"> 4</span><span class="kn">import</span> <span class="nn">scipy.interpolate</span> <span class="k">as</span> <span class="nn">interpolate</span>
 <span class="linenos"> 5</span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="k">def</span><span class="w"> </span><span class="nf">grid_to_station</span><span class="p">(</span><span class="n">station_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">grid_dr</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
+<span class="linenos"> 7</span><span class="k">def</span> <span class="nf">grid_to_station</span><span class="p">(</span><span class="n">station_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">grid_dr</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
 <span class="linenos"> 8</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;三维格点转插值到二维站点, 快速</span>
 <span class="linenos"> 9</span>
 <span class="linenos">10</span><span class="sd">    Args:</span>
@@ -537,23 +538,23 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 <p>可以看到，点的位置和 <code class="docutils literal notranslate"><span class="pre">UPA_obs.csv</span></code> 中的点位置是相同的，但数值是数据 <code class="docutils literal notranslate"><span class="pre">GFS_test.nc</span></code> 中的值。</p>
 </section>
 <section id="id9">
-<h2>将站点数据插值到网格数据上（反距离权重插值）<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<h2>将站点数据插值到网格数据上（反距离权重插值）<a class="headerlink" href="#id9" title="此标题的永久链接">¶</a></h2>
 <p>还会有一种需求，是将站点数据插值到指定精度的网格上。
 原本为 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> 的数据要运用反距离权重插值预测出对应的值。
 反距离权重插值的原理，简单讲就是被预测的值由它附近的点决定，与它距离越近的点权重越大，对它的影响就越大。</p>
 <p>这里整理了国家气象信息中心开发的 <a class="reference external" href="https://github.com/nmcdev/meteva/blob/master/meteva/base/fun/interpolating.py">meteva</a> 库中提供的代码：</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="linenos">  2</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="linenos">  3</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="linenos">  4</span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="linenos">  5</span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">cKDTree</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kn">import</span> <span class="nn">math</span>
+<span class="linenos">  2</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="linenos">  3</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos">  4</span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">cKDTree</span>
 <span class="linenos">  6</span>
 <span class="linenos">  7</span>
 <span class="linenos">  8</span><span class="c1"># 地球半径</span>
 <span class="linenos">  9</span><span class="n">ER</span> <span class="o">=</span> <span class="mf">6371.229</span>
 <span class="linenos"> 10</span>
 <span class="linenos"> 11</span>
-<span class="linenos"> 12</span><span class="k">def</span><span class="w"> </span><span class="nf">lon_lat_to_cartesian</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="linenos"> 12</span><span class="k">def</span> <span class="nf">lon_lat_to_cartesian</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="linenos"> 13</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 14</span><span class="sd">    经度纬度信息转换为直角坐标系</span>
 <span class="linenos"> 15</span>
@@ -569,7 +570,7 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 <span class="linenos"> 25</span>    <span class="k">return</span> <span class="n">xyz</span>
 <span class="linenos"> 26</span>
 <span class="linenos"> 27</span>
-<span class="linenos"> 28</span><span class="k">def</span><span class="w"> </span><span class="nf">grid_data</span><span class="p">(</span><span class="n">lon_min</span><span class="p">,</span> <span class="n">lon_len</span><span class="p">,</span> <span class="n">lon_res</span><span class="p">,</span> <span class="n">lat_min</span><span class="p">,</span> <span class="n">lat_len</span><span class="p">,</span> <span class="n">lat_res</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos"> 28</span><span class="k">def</span> <span class="nf">grid_data</span><span class="p">(</span><span class="n">lon_min</span><span class="p">,</span> <span class="n">lon_len</span><span class="p">,</span> <span class="n">lon_res</span><span class="p">,</span> <span class="n">lat_min</span><span class="p">,</span> <span class="n">lat_len</span><span class="p">,</span> <span class="n">lat_res</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="linenos"> 29</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 30</span><span class="sd">    返回一个DataArray，其维度信息和grid描述一致，数组里面的值为0.</span>
 <span class="linenos"> 31</span><span class="sd">    &quot;&quot;&quot;</span>
@@ -589,7 +590,7 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 <span class="linenos"> 45</span>    <span class="p">)</span>
 <span class="linenos"> 46</span>
 <span class="linenos"> 47</span>
-<span class="linenos"> 48</span><span class="k">def</span><span class="w"> </span><span class="nf">grd_info</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">vres</span><span class="p">):</span>
+<span class="linenos"> 48</span><span class="k">def</span> <span class="nf">grd_info</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">vres</span><span class="p">):</span>
 <span class="linenos"> 49</span>    <span class="n">vlen</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">vmax</span> <span class="o">-</span> <span class="n">vmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">vres</span>
 <span class="linenos"> 50</span>    <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">vlen</span><span class="p">)</span> <span class="o">-</span> <span class="n">vlen</span><span class="p">)</span><span class="o">/</span><span class="n">vlen</span>
 <span class="linenos"> 51</span>    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="mf">0.01</span><span class="p">):</span>
@@ -599,7 +600,7 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 <span class="linenos"> 55</span>    <span class="k">return</span> <span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vlen</span><span class="p">,</span> <span class="n">vres</span><span class="p">)</span>
 <span class="linenos"> 56</span>
 <span class="linenos"> 57</span>
-<span class="linenos"> 58</span><span class="k">def</span><span class="w"> </span><span class="nf">interp_sg_idw</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">lon_info</span><span class="p">,</span> <span class="n">lat_info</span><span class="p">,</span> <span class="n">effectR</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">nearNum</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">decrease</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="linenos"> 58</span><span class="k">def</span> <span class="nf">interp_sg_idw</span><span class="p">(</span><span class="n">sta</span><span class="p">,</span> <span class="n">lon_info</span><span class="p">,</span> <span class="n">lat_info</span><span class="p">,</span> <span class="n">effectR</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">nearNum</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">decrease</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="linenos"> 59</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;站点到格点IDW插值</span>
 <span class="linenos"> 60</span>
 <span class="linenos"> 61</span><span class="sd">    Args:</span>
@@ -678,7 +679,7 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 </div>
 </section>
 <section id="id10">
-<h2>示例数据下载<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<h2>示例数据下载<a class="headerlink" href="#id10" title="此标题的永久链接">¶</a></h2>
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id11" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
@@ -694,63 +695,17 @@ lat 的数据范围是 [65, 20]，lon 的数据范围是 [-150, -50]， 分辨�
 
 
 
-        <script>
-            function loadUtterances(theme) {
-                const script = document.createElement('script');
-                script.src = 'https://utteranc.es/client.js';
-                script.setAttribute('repo', 'junsircoding/blog_comments');
-                script.setAttribute('label', 'blog comments');
-                script.setAttribute('issue-term', 'title');
-                script.setAttribute('theme', theme === 'dark' ? 'github-dark' : 'github-light');
-                script.setAttribute('crossorigin', 'anonymous');
-                script.async = true;
-                const utterancesContainer = document.getElementById('utterances-container');
-                utterancesContainer.innerHTML = '';
-                utterancesContainer.appendChild(script);
-            }
-        
-            const pydocthemeDark = document.getElementById('pydoctheme_dark_css')
-            const pygmentsDark = document.getElementById('pygments_dark_css')
-            const themeSelectors = document.getElementsByClassName('theme-selector')
-
-            function activateTheme(theme) {
-                localStorage.setItem('currentTheme', theme);
-                [...themeSelectors].forEach(e => e.value = theme)
-                switch (theme) {
-                    case 'light':
-                    pydocthemeDark.media = 'not all'
-                    pygmentsDark.media = 'not all'
-                    break;
-                    case 'dark':
-                    pydocthemeDark.media = 'all'
-                    pygmentsDark.media = 'all'
-                    break;
-                    default:
-                    // auto
-                    pydocthemeDark.media = '(prefers-color-scheme: dark)'
-                    pygmentsDark.media = '(prefers-color-scheme: dark)'
-                }
-            }
-
-            function changeTheme(value) {
-                const theme = value === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : value;
-                document.documentElement.setAttribute('data-theme', theme);
-                activateTheme(value)
-                loadUtterances(theme);
-            }
-            
-            document.addEventListener('DOMContentLoaded', function () {
-                // Initialize theme on page load
-                const initialTheme = document.documentElement.getAttribute('data-theme') || 'auto';
-                const currentTheme = initialTheme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : initialTheme;
-                loadUtterances(currentTheme);
-                activateTheme(initialTheme);
-            });
-        </script>
         
         <hr/>
-        <!-- Utterances comments section -->
-        <div id="utterances-container"></div>
+        <!-- Valine comments section -->
+        <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'vZDTYY4Oooj3Gin7gdykS7ir-gzGzoHsz',
+                appKey: '6vrG1UEGkpc3jQY6vUdf4trp'
+            })
+        </script>
         
 
         <div class="clearer"></div>

@@ -99,6 +99,7 @@
     <link rel="stylesheet" href="{{ pathto('_static/pydoctheme_dark.css', 1) }}" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
     <link rel="shortcut icon" type="image/png" href="{{ pathto('_static/' ~ theme_root_icon, 1) }}" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4178487904865687" crossorigin="anonymous"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <meta name="google-adsense-account" content="ca-pub-4178487904865687">
     {%- if builder != "htmlhelp" %}
         {%- if not embedded %}
@@ -181,63 +182,17 @@
                 {% block body %}
                 {% endblock %}
 
-        <script>
-            function loadUtterances(theme) {
-                const script = document.createElement('script');
-                script.src = 'https://utteranc.es/client.js';
-                script.setAttribute('repo', 'junsircoding/blog_comments');
-                script.setAttribute('label', 'blog comments');
-                script.setAttribute('issue-term', 'title');
-                script.setAttribute('theme', theme === 'dark' ? 'github-dark' : 'github-light');
-                script.setAttribute('crossorigin', 'anonymous');
-                script.async = true;
-                const utterancesContainer = document.getElementById('utterances-container');
-                utterancesContainer.innerHTML = '';
-                utterancesContainer.appendChild(script);
-            }
-        
-            const pydocthemeDark = document.getElementById('pydoctheme_dark_css')
-            const pygmentsDark = document.getElementById('pygments_dark_css')
-            const themeSelectors = document.getElementsByClassName('theme-selector')
-
-            function activateTheme(theme) {
-                localStorage.setItem('currentTheme', theme);
-                [...themeSelectors].forEach(e => e.value = theme)
-                switch (theme) {
-                    case 'light':
-                    pydocthemeDark.media = 'not all'
-                    pygmentsDark.media = 'not all'
-                    break;
-                    case 'dark':
-                    pydocthemeDark.media = 'all'
-                    pygmentsDark.media = 'all'
-                    break;
-                    default:
-                    // auto
-                    pydocthemeDark.media = '(prefers-color-scheme: dark)'
-                    pygmentsDark.media = '(prefers-color-scheme: dark)'
-                }
-            }
-
-            function changeTheme(value) {
-                const theme = value === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : value;
-                document.documentElement.setAttribute('data-theme', theme);
-                activateTheme(value)
-                loadUtterances(theme);
-            }
-            
-            document.addEventListener('DOMContentLoaded', function () {
-                // Initialize theme on page load
-                const initialTheme = document.documentElement.getAttribute('data-theme') || 'auto';
-                const currentTheme = initialTheme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : initialTheme;
-                loadUtterances(currentTheme);
-                activateTheme(initialTheme);
-            });
-        </script>
         {% if "不存在这篇文章" not in title and pagename != "index" and pagename != "search" %}
         <hr/>
-        <!-- Utterances comments section -->
-        <div id="utterances-container"></div>
+        <!-- Valine comments section -->
+        <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'vZDTYY4Oooj3Gin7gdykS7ir-gzGzoHsz',
+                appKey: '6vrG1UEGkpc3jQY6vUdf4trp'
+            })
+        </script>
         {% endif %}
 
         <div class="clearer"></div>

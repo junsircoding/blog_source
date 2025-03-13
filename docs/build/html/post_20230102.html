@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN" data-content_root="./">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,15 +44,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=23252803" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+    <link rel="stylesheet" type="text/css" href="_static/pydoctheme.css?v=41b4f12d" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=5349f25f" />
+    <link id="pygments_dark_css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css" href="_static/pygments_dark.css?v=b20cc3f5" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=638b7cfd" />
     
-    <script src="_static/documentation_options.js?v=91bfbbb6"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=7e0347cd"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/translations.js?v=beaddf03"></script>
@@ -67,6 +67,7 @@
 <link rel="stylesheet" href="_static/pydoctheme_dark.css" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
     <link rel="shortcut icon" type="image/png" href="_static/favicon.svg" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4178487904865687" crossorigin="anonymous"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <meta name="google-adsense-account" content="ca-pub-4178487904865687">
             <script type="text/javascript" src="_static/copybutton.js"></script>
             <script type="text/javascript" src="_static/menu.js"></script>
@@ -131,7 +132,7 @@
     <p class="topless"><a href="post_20230318.html"
                           title="上一章">用 QEMU 在 x86 架构的电脑上安装 ARM 系统</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">快速搜索</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -139,7 +140,7 @@
       <input type="submit" value="提交" />
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </nav>
     </div>
@@ -201,7 +202,7 @@
             <div class="body" role="main">
                 
   <section id="m1-mac-stable-diffusion">
-<h1>在 M1 芯片的 Mac 上部署本地 Stable Diffusion<a class="headerlink" href="#m1-mac-stable-diffusion" title="Link to this heading">¶</a></h1>
+<h1>在 M1 芯片的 Mac 上部署本地 Stable Diffusion<a class="headerlink" href="#m1-mac-stable-diffusion" title="此标题的永久链接">¶</a></h1>
 <p>最近这几个月，互联网上有关 AI 的消息非常热门，不管是 AI 绘图还是 ChatGPT AI 问答机器人都非常有意思。
 但是好像涉及这种人工智能的项目都需要比较好的显卡来进行模型的运算，我们普通的 PC 一般只有内置的显卡，性能比较拉跨，大概是支持不了这样的项目。</p>
 <p>但是 Mac 的 M1/M2 系列芯片性能提升了那么多，能不能运行这样的 AI 绘图项目呢？
@@ -209,7 +210,7 @@
 我的电脑是 M1 芯片的 MacBook Air 8GB 版本，如果你的电脑是 Apple 芯片的 Mac，那么这个教程对于你应该是适用的。
 内存 16 GB 比较好，8 GB 也勉强能运行，只是绘图的时候电脑会有点卡，没法运行别的程序。</p>
 <section id="id1">
-<h2>部署步骤<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>部署步骤<a class="headerlink" href="#id1" title="此标题的永久链接">¶</a></h2>
 <p>AI 绘图的项目有很多，我查到的案例是部署 Stable Diffusion，项目的 Github 仓库地址是：</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>https://github.com/bfirsh/stable-diffusion.git
 </pre></div>
@@ -276,7 +277,7 @@
 如果你的英文不错，还有一些艺术鉴赏相关的知识，可能会画出意想不到的作品，快来试试吧。</p>
 </section>
 <section id="id2">
-<h2>参考资料<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>参考资料<a class="headerlink" href="#id2" title="此标题的永久链接">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Stable Diffusion Github 仓库：<a class="reference external" href="https://github.com/bfirsh/stable-diffusion">https://github.com/bfirsh/stable-diffusion</a></p></li>
 <li><p>英文版参考博客：<a class="reference external" href="https://replicate.com/blog/run-stable-diffusion-on-m1-mac">https://replicate.com/blog/run-stable-diffusion-on-m1-mac</a></p></li>
@@ -284,70 +285,24 @@
 </ol>
 </section>
 <section id="id3">
-<h2>视频讲解<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<h2>视频讲解<a class="headerlink" href="#id3" title="此标题的永久链接">¶</a></h2>
 <p><a class="reference external" href="https://www.bilibili.com/video/BV1qP4y1i7BQ/">在 M1 芯片的 Mac 上部署 Stable Diffusion AI 绘图</a></p>
 </section>
 </section>
 
 
 
-        <script>
-            function loadUtterances(theme) {
-                const script = document.createElement('script');
-                script.src = 'https://utteranc.es/client.js';
-                script.setAttribute('repo', 'junsircoding/blog_comments');
-                script.setAttribute('label', 'blog comments');
-                script.setAttribute('issue-term', 'title');
-                script.setAttribute('theme', theme === 'dark' ? 'github-dark' : 'github-light');
-                script.setAttribute('crossorigin', 'anonymous');
-                script.async = true;
-                const utterancesContainer = document.getElementById('utterances-container');
-                utterancesContainer.innerHTML = '';
-                utterancesContainer.appendChild(script);
-            }
-        
-            const pydocthemeDark = document.getElementById('pydoctheme_dark_css')
-            const pygmentsDark = document.getElementById('pygments_dark_css')
-            const themeSelectors = document.getElementsByClassName('theme-selector')
-
-            function activateTheme(theme) {
-                localStorage.setItem('currentTheme', theme);
-                [...themeSelectors].forEach(e => e.value = theme)
-                switch (theme) {
-                    case 'light':
-                    pydocthemeDark.media = 'not all'
-                    pygmentsDark.media = 'not all'
-                    break;
-                    case 'dark':
-                    pydocthemeDark.media = 'all'
-                    pygmentsDark.media = 'all'
-                    break;
-                    default:
-                    // auto
-                    pydocthemeDark.media = '(prefers-color-scheme: dark)'
-                    pygmentsDark.media = '(prefers-color-scheme: dark)'
-                }
-            }
-
-            function changeTheme(value) {
-                const theme = value === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : value;
-                document.documentElement.setAttribute('data-theme', theme);
-                activateTheme(value)
-                loadUtterances(theme);
-            }
-            
-            document.addEventListener('DOMContentLoaded', function () {
-                // Initialize theme on page load
-                const initialTheme = document.documentElement.getAttribute('data-theme') || 'auto';
-                const currentTheme = initialTheme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : initialTheme;
-                loadUtterances(currentTheme);
-                activateTheme(initialTheme);
-            });
-        </script>
         
         <hr/>
-        <!-- Utterances comments section -->
-        <div id="utterances-container"></div>
+        <!-- Valine comments section -->
+        <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'vZDTYY4Oooj3Gin7gdykS7ir-gzGzoHsz',
+                appKey: '6vrG1UEGkpc3jQY6vUdf4trp'
+            })
+        </script>
         
 
         <div class="clearer"></div>
