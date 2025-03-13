@@ -179,12 +179,15 @@
             {%- endif %}
             
             <div class="body" role="main">
-                <!-- id 将作为查询条件 -->
-                <span id="{{pagename}}" class="leancloud_visitors" data-flag-title="{{pagename}}">
-                    <em class="post-meta-item-text">阅读量 </em>
-                    <i class="leancloud-visitors-count">0</i>
-                </span>
                 {% block body %}
+                {% if 'index' != pagename and 'search' != pagename %}
+                    <!-- id 将作为查询条件 -->
+                    <span id="{{pagename}}" class="leancloud_visitors" data-flag-title="{{pagename}}">
+                        <em class="post-meta-item-text">阅读量 </em>
+                        <i class="leancloud-visitors-count"></i>
+                    </span>
+                    {{ super() }}
+                {% endif %}
                 {% endblock %}
 
                 <script>
