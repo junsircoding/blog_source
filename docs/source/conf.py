@@ -44,7 +44,7 @@ html_theme_options = {
 
    # python_docs_theme confs
    "root_url" : "https://junsircoding.github.io",
-   "root_icon" : 'favicon.svg',
+   "root_icon" : 'favicon.ico',
    "root_name":"首页",
    "root_icon_alt_text":"首页",
    "root_include_title":False,
