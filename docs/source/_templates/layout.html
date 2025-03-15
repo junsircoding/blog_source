@@ -98,7 +98,6 @@
 {%- block extrahead -%}
     <link rel="stylesheet" href="{{ pathto('_static/pydoctheme_dark.css', 1) }}" media="(prefers-color-scheme: dark)" id="pydoctheme_dark_css">
     <link rel="shortcut icon" type="image/png" href="{{ pathto('_static/' ~ theme_root_icon, 1) }}" />
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     {%- if builder != "htmlhelp" %}
         {%- if not embedded %}
             <script type="text/javascript" src="{{ pathto('_static/copybutton.js', 1) }}"></script>
@@ -221,18 +220,6 @@
 
         {% if "不存在这篇文章" not in title and pagename != "index" and pagename != "search" %}
         <hr/>
-        <!-- Valine comments section -->
-        <div id="vcomments"></div>
-        <script>
-            new Valine({
-                el: '#vcomments',
-                appId: 'vZDTYY4Oooj3Gin7gdykS7ir-gzGzoHsz',
-                appKey: '6vrG1UEGkpc3jQY6vUdf4trp',
-                avatar:'hide',
-                placeholder:'欢迎留言，支持 Markdown。',
-                meta: ['nick','link']
-            })
-        </script>
         {% endif %}
 
         <div class="clearer"></div>
